@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         
-        $AllUnits = Unit::orderBy('unit','asc');    
+        $AllUnits = Unit::orderBy('unit','asc')->get();    
         $search = $request->search;
         $AllProducts=Product::when($search, function ($q)use ($search) {
                 $q->where('itemname', 'like', "%{$search}%")

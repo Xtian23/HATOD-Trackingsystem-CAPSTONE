@@ -42,7 +42,7 @@
 
     <div class="form-group col-md-3">
       <label>Status</label>
-      {!! Form::select('status', ['' => 'Status ...', 'Pending' => 'Pending', 'Processed' => 'Processed', 'Delivered' => 'Delivered', 'Receieved' => 'Receieved'],$orders->status,['class' => 'form-control'])!!}
+      {!! Form::select('status', ['' => 'Status ...', 'pending' => 'pending', 'processed' => 'processed', 'delivered' => 'delivered', 'receieved' => 'receieved'],$orders->status,['class' => 'form-control'])!!}
     </div>
    
     <!-- DateofDelivery -->

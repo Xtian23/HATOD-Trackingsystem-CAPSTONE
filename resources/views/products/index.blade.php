@@ -330,8 +330,8 @@
                                   </form>
 
                                   <div>
-                                    <table class="table">
-                             
+                                    <table class="table mx-auto text-center" align="center">
+                                     
                                       <thead>
                                         <tr>
                                           <th>Units</th>
@@ -339,13 +339,21 @@
                                         </tr>
                                       </thead>
 
-                                     <!--  <tbody>
-                                        @foreach($products as $product)
+                                      <tbody>
+                                        @foreach($AllUnits as $unit)
+                                        <form action="{{'/units/'.$unit->id,'/destroy'}}" method="POST">
+
+                                         {{csrf_field()}}
+                                         {{method_field('delete')}}
                                         <tr>
-                                          <td>{{$product->unit}}</td>
+                                          <td>*{{$unit->unit}}</td>
+                                          <td>
+                                             <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Product?')"><img src="/delete.png" height="16px">Delete</button>
+                                          </td>
                                         </tr>
                                         @endforeach
-                                      </tbody> -->
+                                      </tbody>
+                                      </form>
                                     </table>
                                   </div>
                                 

@@ -149,10 +149,6 @@
 
     @endforeach
 
-      <div class="hypebeast">
-        {{$products->links()}}
-      </div>
-
     
   </tbody>
 </table>
@@ -164,7 +160,7 @@
             </div>
 
 
-            <div class="form-group col-md-4 float-right">
+            <div class="form-group col-md-4 float-right mt-4">
                 <input type="hidden" name="status" value="pending">
             </div>
 

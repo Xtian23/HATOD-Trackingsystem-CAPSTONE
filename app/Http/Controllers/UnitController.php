@@ -95,7 +95,7 @@ class UnitController extends Controller
     {
         $unit=Unit::find($id);
         $unit->delete();
-        return redirect('products.index');
+        return redirect('/products');
 
     }
 }

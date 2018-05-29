@@ -54,7 +54,7 @@ class OrderController extends Controller
         $input = $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'payment_method' => 'required|in:cash,cod,credit',
-            'status' => 'required|in:Pending,Processed,Delivered,Received',
+            'status' => 'required|in:pending,processed,delivered,received',
             'order_date' => 'required|date',
             'served_by' => 'required|exists:users,id',
             'delivered_by' => 'required|exists:personnels,id',
@@ -135,7 +135,7 @@ class OrderController extends Controller
         $input = $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'payment_method' => 'required|in:cash,cod,credit',
-            'status' => 'required|in:Pending,Processed,Delivered,Received',
+            'status' => 'required|in:pending,processed,delivered,received',
             'order_date' => 'required|date',
             'served_by' => 'required|exists:users,id',
             'delivered_by' => 'required|exists:personnels,id',

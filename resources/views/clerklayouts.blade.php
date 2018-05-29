@@ -19,7 +19,7 @@
 
 <!-- code for navigation -->
 <nav class="navbar navbar-xtian navbar-dark bg-dark navbar-expand-lg  ">
-  <a class="navbar-brand" href="/clerkindex"><img src="/home.png" width="40px" height="40px"></a>
+  <a class="navbar-brand" href="/clerkindex"><img src="/logo1.png"  width="200px" height="40px"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -157,7 +157,7 @@
                     </div>
                -->
 
-                                   <div class="form-control"><label><b>Manage Account</b></label>
+                  <!--                  <div class="form-control"><label><b>Manage Account</b></label>
                                     <div class="col-md-12 mb-3">
                                       <label for="new_password"><b>Username</b></label>
                                       <input type="text" class="form-control" id="new_password" placeholder="Enter New Username" value="{{Auth::user()->username}}" >
@@ -176,14 +176,14 @@
                                      
                                       
                                      </div>
-                                   </div>
+                                   </div> -->
                    </div>
 
-                     
+                   <!--   
                            <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                   <button type="submit" class="btn btn-primary" >Submit</button> 
-                           </div>
+                           </div> -->
               </form>
             </div>
           </div>

@@ -72,8 +72,16 @@ class UserController extends Controller
    }
 
    public function logout(Request $request) {
+
+
+          if(Auth::user()->usertype=='admin'){
+             return redirect('/login')->with(Auth::logout());
+          }else{
+            return redirect('/clerklogin')->with(Auth::logout());
+          }
+        
       
-        return redirect('/login')->with(Auth::logout());
+
 
 
   }

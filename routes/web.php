@@ -23,6 +23,7 @@ Route::get('/logout', 'UserController@logout');
 
 
 Route::view('/login','login');
+Route::view('/clerklogin','clerklogin');
 Route::view('/index','index')->middleware('auth');
 Route::view('/navbar_admin','navbar_admin');
 Route::view('tracking', 'tracking')->middleware('auth');

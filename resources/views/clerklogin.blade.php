@@ -53,9 +53,9 @@
 						<div class="text-center">
 						     <button class="btn btn-primary" ><img src="/login.png" width="20px"> Login</button>
 						 </div>
-						<a href="/register"><p class="mt-2 text-center"><u>Click Here to Register</u></p></a>			
+			<!-- 			<a href="/register"><p class="mt-2 text-center"><u>Click Here to Register</u></p></a>			
 							
-						
+						 -->
 
 					
 				</form>

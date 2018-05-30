@@ -19,7 +19,7 @@ class VehicleController extends Controller
     {
          $AllPersonnels = Personnel::all();
          $AllPersonnels = Personnel::where('personneltype', '=', "Delivery")->get();
-         $AllVehicleTypes = VehicleType::all();
+         $AllVehicleTypes = VehicleType::orderBy('vehicletype','asc')->get();
          $search = $request->search;
          $AllVehicles=Vehicle::when($search, function ($q)use ($search) {
                     $q->where('license_plate', 'like', "%{$search}%")

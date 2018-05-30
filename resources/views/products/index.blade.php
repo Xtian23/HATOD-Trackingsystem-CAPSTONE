@@ -330,23 +330,23 @@
                                   </form>
 
                                   <div>
-                                    <table class="table mx-auto text-center" align="center">
+                                    <table class="table mx-auto table-sm" align="center">
                                      
-                                      <thead>
+                                      <thead class="text-center">
                                         <tr>
-                                          <th>Units</th>
+                                          <th>Unit(s)</th>
                                           <th>Action</th>
                                         </tr>
                                       </thead>
 
-                                      <tbody>
+                                      <tbody class="text-center">
                                         @foreach($AllUnits as $unit)
                                         <form action="{{'/units/'.$unit->id,'/destroy'}}" method="POST">
 
                                          {{csrf_field()}}
                                          {{method_field('delete')}}
                                         <tr>
-                                          <td>*{{$unit->unit}}</td>
+                                          <td>{{$unit->unit}}</td>
                                           <td>
                                              <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Product?')"><img src="/delete.png" height="16px">Delete</button>
                                           </td>

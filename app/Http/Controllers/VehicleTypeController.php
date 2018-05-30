@@ -96,6 +96,6 @@ class VehicleTypeController extends Controller
     {
         $vehicletype=VehicleType::find($id);
         $vehicletype->delete();
-        return redirect('vehicles.index');
+        return redirect('/vehicles');
     }
 }

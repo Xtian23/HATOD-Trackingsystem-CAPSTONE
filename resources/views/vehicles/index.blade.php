@@ -124,53 +124,7 @@
 
  
   <!-- ------------------------------------------------------------------- -->
-  <!-- Modal adding product-->
-    <div class="modal fade" id="exampleModalLongsada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitlesad" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content border-primary col-md-10 offset-md-1">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitlesad">ADD NEW VEHICLE TYPE (ADMIN SIDE)</h5>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-
-          </div>
-
-          <div class="modal-body">
-
-                <div class="card-body">
-                    <form action="{{route('vehicletypes.store') }}" method="POST">
-                    {{csrf_field()}}
-
-
-                       <div class="form-group">
-                            <label >Vehicle Type</label>
-                            <input type="text" class="form-control"  placeholder="Enter Vehicle Type" name="vehicletype" required="true"> 
-                              <div class="text-danger">
-                                      @if($errors->has("vehicletype"))
-                                      {{$errors->first("vehicletype")}}
-                                      @endif 
-                                </div>
-                      </div>
-
-
-              
-                     
-                      
-                      <div class="modal-footer">
-                    
-                      <button type="submit" class="btn btn-primary" >Submit</button> 
-
-                      </div>
-                    </form>
-                 </div>
-               </div>
-             </div>
-           </div> 
-         </div> 
-     <!-- endcODE FOR MODAL ADD NEW TYPE VEHICLE-->
+ 
     </div>
   </div>
 </div>
@@ -318,6 +272,77 @@
       
   </tbody>
 	</table>
+
+   <!-- Modal adding product-->
+    <div class="modal fade" id="exampleModalLongsada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitlesad" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content border-primary col-md-10 offset-md-1">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitlesad">ADD NEW VEHICLE TYPE (ADMIN SIDE)</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+          </div>
+
+          <div class="modal-body">
+
+                <div class="card-body">
+                    <form action="{{route('vehicletypes.store') }}" method="POST">
+                        {{csrf_field()}}
+
+
+                           <div class="form-group">
+                                <label >Vehicle Type</label>
+                                <input type="text" class="form-control"  placeholder="Enter Vehicle Type" name="vehicletype" required="true"> 
+                                  <div class="text-danger">
+                                          @if($errors->has("vehicletype"))
+                                          {{$errors->first("vehicletype")}}
+                                          @endif 
+                                    </div>
+                          </div>
+                          <div class="modal-footer">
+                               <button type="submit" class="btn btn-primary" >Submit</button> 
+                          </div>
+                    </form>
+                                <div>
+                                    <table class="table mx-auto table-sm" align="center">
+                                     
+                                      <thead class="text-center">
+                                        <tr>
+                                          <th>Vehicle Type(s)</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+
+                                      <tbody class="text-center">
+                                        @foreach($AllVehicleTypes as $vehicletype)
+                                        <form action="{{'/vehicletypes/'.$vehicletype->id,'/destroy'}}" method="POST">
+
+                                         {{csrf_field()}}
+                                         {{method_field('delete')}}
+                                        <tr>
+                                          <td>{{$vehicletype->vehicletype}}</td>
+                                          <td>
+                                             <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Vehicle Type?')"><img src="/delete.png" height="16px">Delete</button>
+                                          </td>
+                                        </tr>
+                                        @endforeach
+                                      </tbody>
+                                      </form>
+                                    </table>
+                                  </div>
+              
+                 </div>
+               </div>
+
+
+             </div>
+           </div> 
+         </div> 
+     <!-- endcODE FOR MODAL ADD NEW TYPE VEHICLE-->
 
 
 </div>

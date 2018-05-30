@@ -57,6 +57,7 @@
       <th>Customer</th>
       <th>Address</th>
       <th>Delivery Personnel</th>
+      <th>Served By</th>
       <th>Status</th>
       <th>Total Amount</th>
       <th colspan="2" class="text-center">Action</th>
@@ -72,6 +73,7 @@
         <td>{{ $row->customer->fullname}}</td>
         <td>{{ $row->customer->address }}</td>
         <td>{{ $row->deliveryPersonnel->fullname }}</td>
+        <td>{{ $row->served_by}}</td>
         <td>{{ $row->status}}</td>
         <td class="text-right">{{ number_format($row->total, 2) }}</td>
           <td width="15%">

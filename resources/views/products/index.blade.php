@@ -67,14 +67,16 @@
                 <form action="{{route('products.store') }}" method="POST" enctype="multipart/form-data">
                 {{csrf_field()}}
                     
-                   <div class="form-group" align="center">
+                   <div class="form-group form-control" align="center">
                             Select image to upload:
                             <input type="file" name="itemimage" value="Upload Image" id="fileToUpload" required="true">
-                         <div class="form-group mt-1" align="center">
-                       <!-- code for file-upload -->   
+                          
+                    <!--      <div class="form-group text-primary" align="center">
+                       
+                      
                               <label for="name">filename:</label>
                                <input type="text"  name="name" placeholder="Enter" required="true">
-                        </div> 
+                        </div>  -->
                   </div> 
 
                   <div class="form-group">
@@ -214,13 +216,13 @@
                  {{csrf_field()}}
                  {{method_field('PUT')}}
                         <!-- code for file-upload -->  
-                               <div class="form-group" align="center">
+                               <div class="form-group form-control" align="center">
                                       <img src="{{$product->name}}" class="form-control" width="20%" height="30%">
-                                      <input type="file" name="itemimage" value="Upload Image" id="fileToUpload" >
-                                        <div class="form-group mt-1" align="center">
+                                      <input type="file" name="itemimage" value="Upload Image" id="fileToUpload">
+                                       <!--  <div class="form-group mt-1" align="center">
                                                    <label for="name">filename:</label>
                                                    <input type="text"  name="name" placeholder="Enter" required="true">
-                                        </div> 
+                                        </div>  -->
                               </div> 
                       
                                 <div class="form-group">

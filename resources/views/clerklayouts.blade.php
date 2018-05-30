@@ -117,73 +117,49 @@
                   
                 </div>
 
-               <div class="form-row">
+                <div class="form-row">
                     <div class="col-md-5 mb-3">
                       <label for="firstname"><b>First name</b></label>
-                      <input type="text" class="form-control" value="{{Auth::user()->fname}}" >
-                      
+                      <input type="text" class="form-control" id="firstname" placeholder="First Name" name="fname" value="{{Auth::user()->fname}}" readonly>
                     </div>
 
                     <div class="col-md-5 mb-3">
                       <label for="lastname"><b>Last name</b></label>
-                      <input type="text" class="form-control"  value="{{Auth::user()->lname}}" >
-                      
+                      <input type="text" class="form-control" id="lastname" placeholder="Last name" name="lname" value="{{Auth::user()->lname}}" readonly>
                     </div>
 
-                     <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-3">
                       <label for="age"><b>Age</b></label>
-                      <input type="text" class="form-control"  value="{{Auth::user()->age}}" >
-              
+                      <input type="text" class="form-control" id="age" placeholder="Last name" value="{{Auth::user()->age}}" readonly>
                     </div>
                 
-                
-                    <div class="col-md-8 mb-3">
+                    <div class="col-md-12 mb-3">
                       <label for="address"><b>Address</b></label>
-                      <input type="text" class="form-control" value="{{Auth::user()->address}}" >
-                 
+                      <input type="text" class="form-control" id="address" placeholder="Address" name="address" value="{{Auth::user()->address}}" readonly>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-6 mb-3">
                       <label for="contact_no"><b>Contact Number</b></label>
-                      <input type="text" class="form-control" " value="{{Auth::user()->contact_no}}">
-                    
+                      <input type="text" class="form-control" id="contact_no" placeholder="Address" name="contact_no" value="{{Auth::user()->contact_no}}" readonly>
                     </div>
 
+                    <div class="col-md-6 mb-3">
+                      <label for="birthdate"><b>Birth Date</b></label>
+                      <input type="date" class="form-control" id="birthdate" placeholder="Address" name="birthdate" value="{{Auth::user()->birthdate}}" readonly>
+                    </div>
 
-            <!--           <div class="col-md-12 mb-3">
+                <!--     <div class="col-md-12 mb-3">
                       <label for="email address"><b>Email Address</b></label>
-                      <input type="text" class="form-control"  placeholder="Address" value="" >
-                     
+                      <input type="text" class="form-control" id="email address" placeholder="Address" name="email_add" value="{{Auth::user()->email_add}}" readonly>
                     </div>
-               -->
-
-                  <!--                  <div class="form-control"><label><b>Manage Account</b></label>
-                                    <div class="col-md-12 mb-3">
-                                      <label for="new_password"><b>Username</b></label>
-                                      <input type="text" class="form-control" id="new_password" placeholder="Enter New Username" value="{{Auth::user()->username}}" >
-                                     
-                                    </div>
-                 
-                                     <div class="col-md-12 mb-3">
-                                      <label for="new_password"><b>New Password</b></label>
-                                      <input type="text" class="form-control" id="new_password" placeholder="Enter New Password" value="" >
-                                     
-                                    </div>
-
-                                     <div class="col-md-12 mb-3">
-                                      <label for="confirm_password"><b>Confirm Password</b></label>
-                                      <input type="text" class="form-control" id="confirm_password" placeholder="Enter Confirm Password" value="" >
-                                     
-                                      
-                                     </div>
-                                   </div> -->
-                   </div>
-
-                   <!--   
-                           <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary" >Submit</button> 
-                           </div> -->
+ -->
+                </div> 
+               <!--  <div class="" align="center">
+                    <a href="{{url('/user')}}" class="btn btn-primary">
+                      Manage Account
+                    </a>
+                  </button>
+                </div> -->
               </form>
             </div>
           </div>

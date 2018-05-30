@@ -78,7 +78,7 @@ class ProductController extends Controller
 
         $newProduct = new Product;
         $newProduct->itemimage=$request->itemimage;
-        $newProduct->title=Input::get('name');
+        $newProduct->title=Input::get('item_description');
 
              if (Input::hasFile('itemimage')){
                 $product=Input::file('itemimage');
@@ -148,6 +148,15 @@ class ProductController extends Controller
         // }
 
         $newProduct = Product::find($id);
+        $newProduct->itemimage=$request->itemimage;
+        $newProduct->title=Input::get('item_description');
+
+                 if (Input::hasFile('itemimage')){
+                    $product=Input::file('itemimage');
+                    $product->move(public_path().'/', $product->getClientOriginalName());
+                    $newProduct->name=$product->getClientOriginalName();
+                }
+
         $newProduct->itemname=$request->itemname;
         $newProduct->unit=$request->unit;
         $newProduct->unitprice=$request->unitprice;

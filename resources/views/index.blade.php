@@ -58,12 +58,12 @@
       <img class="d-block w-70 h-50" src="personnels.png" alt="Sixth slide">
       </a>
     </div>
-     </div>
-      <div class="carousel-item ">
-        <a href="http://localhost:8000/reports">
-      <img class="d-block w-70 h-50" src="reoports.png" alt="Seventh slide">
+          <div class="carousel-item mb-5">
+        <a href="http://localhost:8000/report">
+      <img class="d-block w-70 h-50" src="reports.png" alt="Sixth slide">
       </a>
     </div>
+     </div>
 
 
 

@@ -69,7 +69,7 @@
     @foreach($orders as $row)
       <tr>
         <td>{{ $row->id }}</td>
-        <td>{{ date_create($row->order_date)->format('M d, Y ') }}</td>
+        <td>{{ date_create($row->order_date)->format('M d, Y') }}</td>
         <td>{{ $row->customer->fullname}}</td>
         <td>{{ $row->customer->address }}</td>
         <td>{{ $row->deliveryPersonnel->fullname }}</td>

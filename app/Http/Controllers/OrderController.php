@@ -76,7 +76,7 @@ class OrderController extends Controller
         }, 3);
         
        
-
+        session()->flash('notif','Order has been added successfully.');
         return redirect()->route('orders.index');     
     }
 
@@ -167,7 +167,7 @@ class OrderController extends Controller
         }, 3);
         
        
-
+        session()->flash('update','Order has been updated successfully.');
         return redirect()->route('orders.index');     
     }
 

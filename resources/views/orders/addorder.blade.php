@@ -2,6 +2,8 @@
 @section('title','CREATE ORDER')
 @section('contentz')
 
+
+
 {!! Form::open(['url' => route('orders.store'), 'method'=> 'post']) !!}
 <div>
 
@@ -26,6 +28,13 @@
     <div class="form-group col-md-8 ">
       <label >Customer Name</label>
       {!! Form::select('customer_id', $AllCustomers->pluck('fullname','id')->prepend('Select a customer...',''),null,['class' => 'form-control', 'id'=>'customer-name'])!!}
+                                <div class="text-danger">
+                                       @if($errors->has("customer_id"))
+                                      {{$errors->first("customer_id")}}
+                                      @endif 
+                                </div>
+
+                               
     </div>
 
     <!--end-->
@@ -35,6 +44,11 @@
     <div class="form-group col-md-4">
       <label >Contact Number</label>
       <input type="text" class="form-control text-center" name="contact_no" id="contact-number" disabled="true" data-contacts="{{htmlspecialchars(json_encode($AllCustomers->pluck('contact_no','id')))}}">
+                                <div class="text-danger">
+                                       @if($errors->has("contact_no"))
+                                      {{$errors->first("contact_no")}}
+                                      @endif 
+                                </div>
     </div>
     <!--end-->
    
@@ -45,6 +59,12 @@
       <div class="form-group col-md-4">
       <label >Date  Ordered</label>
       {!! Form::date('order_date', null, ['class' => 'form-control', 'placeholder' => 'Date of Ordered']) !!}
+
+                                <div class="text-danger">
+                                       @if($errors->has("order_date"))
+                                      {{$errors->first("order_date")}}
+                                      @endif 
+                                </div>
      </div>
      <!--end -->
 
@@ -52,13 +72,25 @@
        <div class="form-group col-md-4">
             <label for="exampleFormControlSelect2">Payment Method</label>
             {!! Form::select('payment_method', ['' => 'Payment Method', 'cod' => 'Cash on delivery', 'cash' => 'Cash', 'credit' => 'Credit'],null,['class' => 'form-control'])!!}
+
+                               <div class="text-danger">
+                                       @if($errors->has("payment_method"))
+                                      {{$errors->first("payment_method")}}
+                                      @endif 
+                                </div>
+
        </div>
      <!-- end -->
 
      <!-- contact -->
        <div class="form-group col-md-4">
-      <label >Email Address (Optional)</label>
-      <input type="text" class="form-control text-center" name="email_add" id="email-add" disabled="true" data-emails="{{htmlspecialchars(json_encode($AllCustomers->pluck('email_add','id')))}}">
+          <label >Email Address (Optional)</label>
+          <input type="text" class="form-control text-center" name="email_add" id="email-add" disabled="true" data-emails="{{htmlspecialchars(json_encode($AllCustomers->pluck('email_add','id')))}}">
+                                <div class="text-danger">
+                                       @if($errors->has("email_add"))
+                                      {{$errors->first("email_add")}}
+                                      @endif 
+                                </div>
      </div>
      <!-- end -->
      </div>
@@ -67,11 +99,17 @@
 
       <form>
    <div class="form-row ">
-    <div class="form-group col-md-12">
-      <label>Address</label>
-      <input type="text" class="form-control" name="address" id="customer-address" disabled="true" data-addresses="{{htmlspecialchars(json_encode($AllCustomers->pluck('address','id')))}}">
-    </div>
-     </div>
+        <div class="form-group col-md-12">
+              <label>Address</label>
+              <input type="text" class="form-control" name="address" id="customer-address" disabled="true" data-addresses="{{htmlspecialchars(json_encode($AllCustomers->pluck('address','id')))}}">
+
+                               <div class="text-danger">
+                                       @if($errors->has("address"))
+                                      {{$errors->first("address")}}
+                                      @endif 
+                                </div>
+        </div>
+   </div>
      </form>
         {!! Form::open(['method'=>'GET','url' => route('products.index'),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
             <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
@@ -137,7 +175,9 @@
 
             <td>
                    <div class="form-group">
-                    {!! Form::text("details[{$loop->index}][quantity]", null, ['class' => 'form-control prc text-center quantity', 'disabled' => true, 'placeholder' => 'Enter quantity']) !!}
+                    {!! Form::number("details[{$loop->index}][quantity]", null, ['class' => 'form-control prc text-center quantity', 'disabled' => true, 'placeholder' => 'Enter quantity','min'=>'0']) !!}
+ 
+                         
                   </div>
             </td>
             <td>
@@ -177,7 +217,6 @@
                     <label for="exampleFormControlSelect1"><b>Served by:</b></label>
                     <input type="text" disabled class="form-control" value="{{Auth::user()->fname}} {{Auth::user()->lname}}">
 
-
                     <input type="hidden" class="form-control" name="served_by" value="{{Auth::user()->id}}">
               </div>  
 
@@ -188,6 +227,14 @@
             <div class="form-group col-md-4">
                 <label for="exampleFormControlSelect1"><b>Delivered by:</b></label>
               {!! Form::select('delivered_by', $AllPersonnels->pluck('fullname','id')->prepend('Select a Delivery...',''),null,['class' => 'form-control', 'id'=>'personnel-name'])!!}
+
+                                <div class="text-danger">
+                                       @if($errors->has("delivered_by"))
+                                      {{$errors->first("delivered_by")}}
+                                      @endif 
+                                </div>
+
+
             </div>
 
 

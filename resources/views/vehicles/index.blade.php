@@ -112,8 +112,8 @@
                     {!! Form::select('delivery_personnel', $AllPersonnels->pluck('fullname','fullname')->prepend('Select a Delivery Personnel...',''),null,['class' => 'form-control', 'id'=>'personnel-name','required'=>'true'])!!}
 
                                <div class="text-danger">
-                                      @if($errors->has("fullname"))
-                                      {{$errors->first("fullname")}}
+                                      @if($errors->has("delivery_personnel"))
+                                      {{$errors->first("delivery_personnel")}}
                                       @endif 
                                 </div>
               </div>
@@ -245,8 +245,8 @@
                     {!! Form::select('delivery_personnel', $AllPersonnels->pluck('fullname','fullname')->prepend('Select a Delivery Personnel...',''),$vehicle->delivery_personnel,['class' => 'form-control', 'id'=>'personnel-name','required'=>'true'])!!}
 
                                 <div class="text-danger">
-                                      @if($errors->has("fullname"))
-                                      {{$errors->first("fullname")}}
+                                      @if($errors->has("delivery_personnel"))
+                                      {{$errors->first("delivery_personnel")}}
                                       @endif 
                                 </div>
 

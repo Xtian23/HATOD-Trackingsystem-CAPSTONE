@@ -121,7 +121,7 @@ class VehicleController extends Controller
                 "license_plate"=>"required|string",
                 "vehicletype"=>"required",
                 "made"=>"required|string|max:20",
-                "delivery_personnel"=>"required"
+                "delivery_personnel"=>"required|unique:vehicles"
             ]);
             
         }catch(\Illuminate\Validation\ValidationException $e){

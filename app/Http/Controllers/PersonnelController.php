@@ -54,11 +54,14 @@ class PersonnelController extends Controller
         try {
         //validation for input Customer
             $this->validate($request,[
-            "personnel_fname"=>"required|string|alpha",
-            "personnel_lname"=>"required|string|alpha",
+            "usertype"=>"required",
+            "username"=>"required",
+            "password"=>"required",
+            "personnel_fname"=>"required|regex:/^[a-zA-Z0-9\s]+$/",
+            "personnel_lname"=>"required|regex:/^[a-zA-Z0-9\s]+$/",
             "address"=>"required|string",
             "birthdate"=>"required|before:-1 year",
-            "contact_no"=>"required|numeric",
+            "contact_no"=>"required|numeric|digits:11",
             "personneltype"=>"required"
         ]);
             
@@ -130,11 +133,14 @@ class PersonnelController extends Controller
          try {
         //validation for input Customer
             $this->validate($request,[
-            "personnel_fname"=>"required|string|alpha",
-            "personnel_lname"=>"required|string|alpha",
+            "usertype"=>"required",
+            "username"=>"nullable",
+            "password"=>"nullable",
+            "personnel_fname"=>"required|regex:/^[a-zA-Z0-9\s]+$/",
+            "personnel_lname"=>"required|regex:/^[a-zA-Z0-9\s]+$/",
             "address"=>"required|string",
             "birthdate"=>"required|before:-18 year",
-            "contact_no"=>"required|numeric",
+            "contact_no"=>"required|numeric|digits:11",
             "personneltype"=>"required"
         ]);
             
@@ -145,15 +151,15 @@ class PersonnelController extends Controller
                 ->withErrors($e->validator);     
         }
         
-        $newUser = User::find($id);
-        $newUser->usertype=$request->usertype;
-        $newUser->username=$request->username;
-        $newUser->fname=$request->personnel_fname;
-        $newUser->lname=$request->personnel_lname;
-        $newUser->address=$request->address;
-        $newUser->birthdate=$request->birthdate;
-        $newUser->contact_no=$request->contact_no;
-        $newUser->password=bcrypt($request->password);  
+        // $newUser = User::find($id);
+        // $newUser->usertype=$request->usertype;
+        // $newUser->username=$request->username;
+        // $newUser->fname=$request->personnel_fname;
+        // $newUser->lname=$request->personnel_lname;
+        // $newUser->address=$request->address;
+        // $newUser->birthdate=$request->birthdate;
+        // $newUser->contact_no=$request->contact_no;
+        // $newUser->password=bcrypt($request->password);  
         $newPersonnel =  Personnel::find($id);
         $newPersonnel->personnel_fname=$request->personnel_fname;
         $newPersonnel->personnel_lname=$request->personnel_lname;
@@ -163,7 +169,10 @@ class PersonnelController extends Controller
         $newPersonnel->personneltype=$request->personneltype;
          $newPersonnel->color=$request->color;
 
-        $newUser->save();
+
+
+
+        // $newUser->save();
         $newPersonnel->save();
         session()->flash('update',$newPersonnel->personnel_fname.' '.$newPersonnel->personnel_lname.' has been updated successfully.');//displaying notification for updating successfully
         return redirect()->route('personnels.index');

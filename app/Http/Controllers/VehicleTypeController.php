@@ -40,10 +40,23 @@ class VehicleTypeController extends Controller
      */
     public function store(Request $request)
     {
+         try {
+                $this  ->validate($request,[
+                    "vehicletype"=>"required|unique:vehicle_types|regex:/[a-zA-Z0-9]+$/"
+                ]);
+
+            }catch(\Illuminate\Validation\ValidationException $e){
+            return redirect()->route('vehicles.index')
+                ->with('open-create-modal', true)
+                ->withInput($request->all())
+                ->withErrors($e->validator);
+        }
+
+
         $newVehicleType = new VehicleType;
         $newVehicleType->vehicletype=$request->vehicletype;
         $newVehicleType->save();
-
+        session()->flash('notif',$newVehicleType->vehicletype.' vehicle type has been added successfully');
         return redirect()->route('vehicles.index');
     }
 

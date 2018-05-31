@@ -10,6 +10,7 @@
     @if(session('open-create-modal'))
        $("#exampleModalLong").modal('show')
     @endif
+
   });
 </script>
 @endpush
@@ -88,13 +89,14 @@
                           <img src="{{asset ('plus-3x.png')}}" width="20px" height="20px"> 
                           </a>
                       </div> 
+                                
+                </div>
                                 <div class="text-danger">
                                       @if($errors->has("vehicletype"))
                                       {{$errors->first("vehicletype")}}
                                       @endif 
                                 </div>
-                </div>
-
+                              
 
             <div class="form-group">
                   <label >Vehicle Description</label>
@@ -302,11 +304,7 @@
                            <div class="form-group">
                                 <label >Vehicle Type</label>
                                 <input type="text" class="form-control"  placeholder="Enter Vehicle Type" name="vehicletype" required="true"> 
-                                  <div class="text-danger">
-                                          @if($errors->has("vehicletype"))
-                                          {{$errors->first("vehicletype")}}
-                                          @endif 
-                                    </div>
+                               
                           </div>
                           <div class="modal-footer">
                                <button type="submit" class="btn btn-primary" >Submit</button> 
@@ -329,7 +327,7 @@
                                          {{csrf_field()}}
                                          {{method_field('delete')}}
                                         <tr>
-                                          <td>{{$vehicletype->vehicletype}}</td>
+                                          <td>{{$vehicletype->vehicletype}}{{'s'}}</td>
                                           <td>
                                              <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Vehicle Type?')"><img src="/delete.png" height="16px">Delete</button>
                                           </td>

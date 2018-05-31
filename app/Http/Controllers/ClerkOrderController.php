@@ -7,6 +7,7 @@ use App\Order;
 use App\Customer;
 use App\Product;
 use App\Personnel;
+use App\OrderLine;
 use DB;
 class ClerkOrderController extends Controller
 {
@@ -68,11 +69,11 @@ class ClerkOrderController extends Controller
         DB::transaction(function () use ($input) {
             $order = Order::create(array_except($input, ['details']));
             $order->details()->createMany($input['details']);
-            $order->notifyCustomer(); //ENABLE TO TEXT CUSTOMER
+            //$order->notifyCustomer(); //ENABLE TO TEXT CUSTOMER
         });
         
        
-
+        session()->flash('notif','Order has been added successfully.');
         return redirect()->route('clerkorders.index');     
     }
 
@@ -95,7 +96,21 @@ class ClerkOrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $orders = Order::with(['details.product', 'customer', 'deliveryPersonnel'])->whereId($id)->first();
+        // dd($orders->toArray());
+
+        $AllCustomers = Customer::all();
+        $AllProducts = Product::all();
+        $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
+
+
+        return view('clerkorders.edit', [
+                'orders' => $orders, 
+                'AllCustomers'=>$AllCustomers,
+               'products'=>$AllProducts,
+               'AllPersonnels'=>$AllPersonnels
+            ]);
     }
 
     /**
@@ -107,7 +122,43 @@ class ClerkOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'payment_method' => 'required|in:cash,cod,credit',
+            'status' => 'required|in:pending,processed,delivered,received',
+            'order_date' => 'required|date',
+            'served_by' => 'required|exists:users,id',
+            'delivered_by' => 'required|exists:personnels,id',
+            'details' => 'required|array|min:1',
+            'details.*.product_id' => 'required_with_all:details.*.unit_price,details.*.quantity',
+            'details.*.unit_price' => 'required_with_all:details.*.product_id,details.*.quantity',
+            'details.*.quantity' => 'required_with_all:details.*.product_id,details.*.unit_price'
+           
+        ]);
+
+
+
+        // dd($input);
+
+        DB::transaction(function () use ($input, $id) {
+            // $order = Order::create(array_except($input, ['details']));
+            // $order->details()->createMany($input['details']);
+            // $order->notifyCustomer();
+            OrderLine::whereOrderId($id)->delete();
+
+            $order = Order::find($id);
+            $order->update($input);
+            $order->details()->createMany($input['details']);
+
+            if( $order->status == 'processed' ){
+                $order->notifyCustomer();
+            }
+
+        }, 3);
+        
+       
+        session()->flash('update','Order has been updated successfully.');
+        return redirect()->route('clerkorders.index'); 
     }
 
     /**

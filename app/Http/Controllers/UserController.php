@@ -99,7 +99,7 @@ class UserController extends Controller
 
 
           $this->validate($request,[
-        "username"=>"string",
+        "username"=>"string|nullable",
         "fname"=>"string",
         "lname"=>"string",
         "birthdate"=>"date",

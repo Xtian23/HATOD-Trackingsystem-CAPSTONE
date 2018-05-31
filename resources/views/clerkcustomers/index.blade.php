@@ -133,7 +133,7 @@
                       
                       </div>
                       <div class="modal-footer">
-                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                       <button type="submit" class="btn btn-primary" >Submit</button> 
                       </div>
                    </form>
@@ -201,7 +201,7 @@
                       <a  href="" class="btn btn-primary btn-sm"  data-target="#exampleModalLongwa-{{$customer->id}}" data-toggle="modal"><img src="/edit.png" height="15px"> Edit</a>
                       {{csrf_field()}}
                       {{method_field('delete')}}
-                      <button type="submit" class="btn btn-danger btn-sm"  name="submit"  onclick="return confirm('Are you sure you want to delete this Customer?')"><img src="/delete.png" height="16px">Delete</button>
+        <!--               <button type="submit" class="btn btn-danger btn-sm"  name="submit"  onclick="return confirm('Are you sure you want to delete this Customer?')"><img src="/delete.png" height="16px">Delete</button> -->
                   </form>
               </td>
 
@@ -290,7 +290,7 @@
                       
                       </div>
                       <div class="modal-footer">
-                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                       <button type="submit" class="btn btn-primary" >Submit</button> 
                       </div>
                    </form>

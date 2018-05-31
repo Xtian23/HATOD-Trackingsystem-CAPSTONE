@@ -1,8 +1,8 @@
-@extends('layouts')
+@extends('clerklayouts')
 @section('title','ORDERS')
-@section('contentz')
+@section('content')
 
-{!! Form::open(['url' => route('orders.update', ['id' => $orders->id]), 'method'=> 'patch']) !!}
+{!! Form::open(['url' => route('clerkorders.update', ['id' => $orders->id]), 'method'=> 'patch']) !!}
 <div>
 
 <div class="col-md-10 offset-md-1 bg-light  form-control border-primary " >
@@ -240,7 +240,7 @@
    
  <div class="text-right mt-3">
 
- <a href="{{route('orders.index')}}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
+ <a href="{{route('clerkorders.index')}}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
     
         <button type="submit" class="btn btn-primary  text-center" >Submit</button>
  </div>

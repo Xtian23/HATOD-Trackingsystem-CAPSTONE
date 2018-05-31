@@ -146,14 +146,14 @@
                     </div>
                     <div class="card-body">
                       <label>Username</label>
-                      <input type="text" name="username"  class="form-control">
+                      <input type="text" name="username"  class="form-control" required="true">
                           <div class="text-danger">
                                @if($errors->has("username"))
                                {{$errors->first("username")}}
                                @endif 
                           </div>
                       <label>Password</label>
-                      <input type="password" name="password" class="form-control">
+                      <input type="password" name="password" class="form-control"required="true">
                           <div class="text-danger">
                                @if($errors->has("password"))
                                {{$errors->first("password")}}
@@ -365,7 +365,7 @@
                                         </div>
                                         <div class="card-body">
                                           <label>Username</label>
-                                          <input type="text" name="username" value="{{$personnel->username}}" class="form-control">
+                                          <input type="text" name="username" value="" class="form-control">
                                                 <div class="text-danger">
                                                       @if($errors->has("username"))
                                                        {{$errors->first("username")}}
@@ -378,7 +378,7 @@
                                                      {{$errors->first("password")}}
                                                      @endif
                                                  </div>
-                                          <input type="hidden" name="usertype" value="userclerk">
+                                         <input type="hidden" name="usertype" value="userclerk">
 
                                      
                                         </div>

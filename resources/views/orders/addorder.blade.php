@@ -8,6 +8,7 @@
 <div>
 
 <div class="col-md-10 offset-md-1 bg-light  form-control border-primary " >
+
  
   <div class="class text-center">
     <h1>ORDER FORM</h1>
@@ -243,7 +244,7 @@
    
  <div class="text-right mt-3">
 
- <a href="home" class="btn btn-danger" role="button" aria-pressed="true">Cancel</a>
+ <a href="{{route('orders.index')}}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
     
         <button type="submit" class="btn btn-primary  text-center" >Submit</button>
  </div>

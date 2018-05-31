@@ -192,7 +192,7 @@
    
  <div class="text-right mt-3">
 
- <a href="home" class="btn btn-danger" role="button" aria-pressed="true">Cancel</a>
+ <a href="{{route('clerkorders.index')}}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
     
         <button type="submit" class="btn btn-primary  text-center" >Submit</button>
  </div>

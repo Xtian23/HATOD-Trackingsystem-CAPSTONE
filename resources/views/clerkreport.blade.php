@@ -80,7 +80,7 @@
       <th>Order Date/Time</th>
       <th>Customer</th>
       <th>Address</th>
-      <th>Delivery Personnel</th>
+      <th>Delivered By</th>
       <th>Status</th>
       <th>Total Amount</th>
       <th class="text-center">

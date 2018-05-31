@@ -113,7 +113,7 @@
         <div class="row">
           <div class="form-group col-6">
             <label><b>Change Password</b></label>
-            <input type="password" class="form-control" placeholder="Create New Password" name="password" id="password">
+            <input type="password" class="form-control"  name="password">
             <div class="text-danger">
               @if($errors->has("password"))
                {{$errors->first("password")}}
@@ -122,13 +122,13 @@
           </div>
           <div class="form-group col-6">
             <label><b>Confirm Password</b></label>
-            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm New Password" id="confirm_password">
+            <input type="password" class="form-control" name="password_confirmation">
           </div>
         </div>
 <br><hr>
         <div class="row">
           <div class="form-group col-md-4 offset-md-10">
-            <button type="submit" class="btn btn-primary col-md-4">Save</button>
+            <button type="submit" class="btn btn-primary col-md-4">Submit</button>
           </div>
         </div>
       </form>

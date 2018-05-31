@@ -56,7 +56,8 @@ class Order extends Model
 
      public function notifyCustomer()
     {
-        $message = new SMS($this->customer->contact_no, "Good Day, Your order is now being Processed.");
+        $message = new SMS($this->customer->contact_no, "Good Day Maam/Sir, Your order is now being Processed.H.A.T.O.D. Tracking System
+            ");
         return $message->send();
     }
 

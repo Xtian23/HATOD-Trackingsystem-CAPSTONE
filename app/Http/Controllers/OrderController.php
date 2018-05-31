@@ -160,9 +160,9 @@ class OrderController extends Controller
             $order->update($input);
             $order->details()->createMany($input['details']);
 
-            // if( $order->status == 'Processed' ){
-            //     $order->notifyCustomer();
-            // }
+            if( $order->status == 'processed'  ){
+                $order->notifyCustomer();
+            }
 
         }, 3);
         

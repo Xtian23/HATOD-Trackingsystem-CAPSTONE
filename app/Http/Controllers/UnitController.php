@@ -39,6 +39,17 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+                $this  ->validate($request,[
+                    "unit"=>"required|unique:units|alpha"
+                ]);
+
+            }catch(\Illuminate\Validation\ValidationException $e){
+            return redirect()->route('products.index')
+                ->with('open-create-modal', true)
+                ->withInput($request->all())
+                ->withErrors($e->validator);
+        }
         $newUnit = new Unit;
         $newUnit->unit=$request->unit;
         $newUnit->save();

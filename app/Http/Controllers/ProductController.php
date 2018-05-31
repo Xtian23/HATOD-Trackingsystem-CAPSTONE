@@ -61,9 +61,9 @@ class ProductController extends Controller
         try {
             //validation for input products
             $this->validate($request,[
-            "itemimage"=>"required",
-            "itemname"=>"required",
-            "item_description"=>"required",
+            "itemimage"=>"required|image",
+            "itemname"=>"required|string|unique:products",
+            "item_description"=>"required|string|max:150",
             "unitprice"=>"required",
             "unit"=>"required"
              ]);
@@ -130,22 +130,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // try {
-        // //validation for input products
-        //     $this->validate($request,[
-        //     "itemimage"=>"required",
-        //     "itemname"=>"required",
-        //     "item_description"=>"required",
-        //     "unitprice"=>"required",
-        //     "unit"=>"required"
-        //      ]);
+        try {
+        //validation for input products
+            $this->validate($request,[
+            "itemimage"=>"nullable|image",
+            "itemname"=>"required|string",
+            "item_description"=>"required|string|max:150",
+            "unitprice"=>"required",
+            "unit"=>"required"
+             ]);
 
-        //     }catch(\Illuminate\Validation\ValidationException $e){
-        //     return redirect()->route('products.index')
-        //         ->with('open-update-modal', $id)
-        //         ->withInput($request->all())
-        //         ->withErrors($e->validator);
-        // }
+            }catch(\Illuminate\Validation\ValidationException $e){
+            return redirect()->route('products.index')
+                ->with('open-update-modal', $id)
+                ->withInput($request->all())
+                ->withErrors($e->validator);
+        }
 
         $newProduct = Product::find($id);
         $newProduct->itemimage=$request->itemimage;

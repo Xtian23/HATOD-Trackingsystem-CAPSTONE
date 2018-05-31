@@ -55,7 +55,7 @@
       <div class="modal-content border-primary">
 
       <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">CREATE NEW PRODUCT (ADMIN SIDE)</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">CREATE NEW PRODUCT</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -70,13 +70,14 @@
                    <div class="form-group form-control" align="center">
                             Select image to upload:
                             <input type="file" name="itemimage" value="Upload Image" id="fileToUpload" required="true">
+
+                              <div class="text-danger">
+                                @if($errors->has("itemimage"))
+                                {{$errors->first("itemimage")}}
+                                @endif 
+                            </div>
                           
-                    <!--      <div class="form-group text-primary" align="center">
-                       
-                      
-                              <label for="name">filename:</label>
-                               <input type="text"  name="name" placeholder="Enter" required="true">
-                        </div>  -->
+          
                   </div> 
 
                   <div class="form-group">
@@ -122,7 +123,7 @@
                          <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><img src="/peso.png" width="30px"></span>
                           </div>
-                          <input type="number" min=".50" max="10000000.00" step=".50" class="form-control"  pattern="[0-9]"  placeholder="Enter Unit price ..." name="unitprice" required="true">
+                          <input type="number" min=".25" max="10000000.00" step=".25" class="form-control"  pattern="[0-9]"  placeholder="Enter Unit price ..." name="unitprice" required="true">
                             <div class="text-danger">
                                @if($errors->has("unitprice"))
                                {{$errors->first("unitprice")}}
@@ -132,7 +133,7 @@
                    </div>
                  
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                       <button type="submit" class="btn btn-primary" >Submit</button> 
                   </div>
 
@@ -181,7 +182,7 @@
               <td><img src="{{$product->name}}" width="40px" height="40px"></td>
               <td><div class="text-left">{{$product->itemname}}</div></td>
               <td>{{$product->item_description}}</td>
-              <td> {{$product->unit}}</td>
+              <td><b>{{$product->unit}}</b></td>
               <td>{{$product->unitprice}} </td>
               <td>
                   <form action="{{'/products/'.$product->id,'/edit'}}" method="post">
@@ -203,7 +204,7 @@
           <div class="modal-content border-primary">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">EDIT PRODUCT (ADMIN SIDE)</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">EDIT PRODUCT</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -219,10 +220,7 @@
                                <div class="form-group form-control" align="center">
                                       <img src="{{$product->name}}" class="form-control" width="20%" height="30%">
                                       <input type="file" name="itemimage" value="Upload Image" id="fileToUpload">
-                                       <!--  <div class="form-group mt-1" align="center">
-                                                   <label for="name">filename:</label>
-                                                   <input type="text"  name="name" placeholder="Enter" required="true">
-                                        </div>  -->
+                                     
                               </div> 
                       
                                 <div class="form-group">
@@ -279,8 +277,8 @@
                                
                   
                               <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                 <button type="submit" class="btn btn-primary" >Save</button> 
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                 <button type="submit" class="btn btn-primary" >Submit</button> 
                               </div>
                   </form>
                 </div>
@@ -306,7 +304,7 @@
                       <div class="modal-content border-primary col-md-10 offset-md-1">
 
                         <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitlesad">ADD NEW UNIT (ADMIN SIDE)</h5>
+                              <h5 class="modal-title" id="exampleModalLongTitlesad">ADD NEW UNIT</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -321,10 +319,16 @@
                                            <div class="form-group">
                                                 <label >Product Unit </label>
                                                 <input type="text" class="form-control" placeholder="Enter Product Unit" name="unit" required="true"> 
-
                                                 <small id="passwordHelpBlock" class="form-text text-primary">
                                                   Product Unit must contain letter(s) only.
                                                 </small>
+                                                  <div class="text-danger">
+                                                     @if($errors->has("unit"))
+                                                     {{$errors->first("unit")}}
+                                                     @endif 
+                                                  </div>
+
+
                                           </div>  
                                           <div class="modal-footer">
                                               <button type="submit" class="btn btn-primary" >Submit</button> 

@@ -56,11 +56,11 @@ class ClerkCustomerController extends Controller
         try {
             //validation for input customer
             $this->validate($request,[
-                "customer_fname"=>"required|string",
-                "customer_lname"=>"required|string",
+                "customer_fname"=>"required|string|alpha",
+                "customer_lname"=>"required|string|alpha",
                 "address"=>"required|string",
-                "birthdate"=>"required|before:now",
-                "contact_no"=>"required",
+                "birthdate"=>"required|date|before:-1 year",
+                "contact_no"=>"required|numeric",
                 "email_add"=>"email"
              
             ]);
@@ -121,11 +121,11 @@ class ClerkCustomerController extends Controller
           try {
             //validation for input customer
             $this->validate($request,[
-                "customer_fname"=>"required|string",
-                "customer_lname"=>"required|string",
+                "customer_fname"=>"required|string|alpha",
+                "customer_lname"=>"required|string|alpha",
                 "address"=>"required|string",
-                "birthdate"=>"required|before:now",
-                "contact_no"=>"required",
+                "birthdate"=>"required|date|before:-1 year",
+                "contact_no"=>"required|numeric",
                 "email_add"=>"email"
              
             ]);

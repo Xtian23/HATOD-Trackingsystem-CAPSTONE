@@ -56,7 +56,7 @@
                 <div class="modal-content border-primary">
 
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">CREATE NEW CUSTOMER (ADMIN SIDE)</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">CREATE NEW CUSTOMER </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -70,7 +70,10 @@
                       <div class="form-group">
                         <label >First Name</label>
                         <input type="text" class="form-control"   placeholder="Enter First name ..." name="customer_fname" required="true">
-                                <div class="text-danger">
+                     <!--    <small class="text-primary">
+                          First name accepts letter(s) only.
+                        </small>
+ -->                                <div class="text-danger">
                                         @if($errors->has("customer_fname"))
                                       {{$errors->first("customer_fname")}}
                                       @endif 
@@ -80,7 +83,10 @@
 
                       <div class="form-group">
                         <label >Last Name</label>
-                        <input type="text" class="form-control"  placeholder="Enter Last name ..." name="customer_lname" required="true">
+                        <input type="text" class="form-control"   placeholder="Enter Last name ..." name="customer_lname" required="true">
+                     <!--       <small class="text-primary">
+                              Last name accepts letter(s) only.
+                            </small> -->
                                 <div class="text-danger">
                                       @if($errors->has("customer_lname"))
                                       {{$errors->first("customer_lname")}}
@@ -107,7 +113,7 @@
                                 </div>
                       </div>
                       <div class="form-group">
-                        <label >Contact number</label>
+                        <label >Contact Number</label>
                         <input type="text" class="form-control"  placeholder="Enter Contact Number ..." name="contact_no" required="true">
                                   <div class="text-danger">
                                         @if($errors->has("contact_no"))
@@ -205,7 +211,7 @@
                 <div class="modal-content border-primary">
 
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">EDIT CUSTOMER (ADMIN SIDE)</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">EDIT CUSTOMER</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -257,7 +263,7 @@
                               </div>
                       </div>
                       <div class="form-group">
-                        <label >Contact number</label>
+                        <label >Contact Number</label>
                         <input type="text" class="form-control"  placeholder="Enter Contact Number ..." name="contact_no" required="true" value="{{$customer->contact_no}}">
                             <div class="text-danger">
                                 @if($errors->has("contact_no"))

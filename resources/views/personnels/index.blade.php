@@ -167,7 +167,7 @@
                <!--END Pluck Personnel Type -->
                   <!-- StartCode Button for Close / Submit -->
                    <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                      <button type="submit" class="btn btn-primary" >Submit</button> 
                   </div>
                   <!-- ENDCode Button for Close / Submit -->
@@ -334,7 +334,7 @@
                             </div>
 
                             <div class="form-group">
-                              <label >Contact#</label>
+                              <label >Contact Number</label>
                               <input type="text" class="form-control"  placeholder="Contact Number" name="contact_no" required="true" value="{{$personnel->contact_no}}">
                                     <div class="text-danger">
                                         @if($errors->has("contact_no"))
@@ -388,11 +388,11 @@
 
              
 
-                             <div class="modal-footer">    <a
-                             href="/personnels" class="btn btn-secondary
+                             <div class="modal-footer">    
+                              <a href="/personnels" class="btn btn-secondary
                              active" role="button" aria-
-                             pressed="true">Close</a>    <button type="submit"
-                             class="btn btn-primary">Save</button> </div>
+                             pressed="true">Cancel</a>    <button type="submit"
+                             class="btn btn-primary">Submit</button> </div>
 
                       </form>
                    </div>

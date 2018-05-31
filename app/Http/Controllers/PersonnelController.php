@@ -54,11 +54,11 @@ class PersonnelController extends Controller
         try {
         //validation for input Customer
             $this->validate($request,[
-            "personnel_fname"=>"required|string",
-            "personnel_lname"=>"required|string",
+            "personnel_fname"=>"required|string|alpha",
+            "personnel_lname"=>"required|string|alpha",
             "address"=>"required|string",
-            "birthdate"=>"required|before:now",
-            "contact_no"=>"required",
+            "birthdate"=>"required|before:-1 year",
+            "contact_no"=>"required|numeric",
             "personneltype"=>"required"
         ]);
             
@@ -68,6 +68,7 @@ class PersonnelController extends Controller
                 ->withInput($request->all())
                 ->withErrors($e->validator);     
         }
+
         $newUser = new User;
         $newUser->usertype=$request->usertype;
         $newUser->username=$request->username;
@@ -129,17 +130,17 @@ class PersonnelController extends Controller
          try {
         //validation for input Customer
             $this->validate($request,[
-            "personnel_fname"=>"required|string",
-            "personnel_lname"=>"required|string",
+            "personnel_fname"=>"required|string|alpha",
+            "personnel_lname"=>"required|string|alpha",
             "address"=>"required|string",
-            "birthdate"=>"required|before:now",
-            "contact_no"=>"required",
+            "birthdate"=>"required|before:-18 year",
+            "contact_no"=>"required|numeric",
             "personneltype"=>"required"
         ]);
             
            }catch(\Illuminate\Validation\ValidationException $e){
             return redirect()->route('personnels.index')
-                ->with('open-create-modal', true)
+                ->with('open-update-modal', $id)
                 ->withInput($request->all())
                 ->withErrors($e->validator);     
         }

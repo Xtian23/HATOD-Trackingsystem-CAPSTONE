@@ -61,8 +61,6 @@ class UserController extends Controller
             else {
               return redirect('/clerkindex')->with('message', 'Welcome to HATOD TRACKINGSYSTEM!');
             }
-     
-        
       }
       else
       {

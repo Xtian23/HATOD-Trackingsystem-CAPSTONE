@@ -82,7 +82,7 @@
 
                <label >Vehicle Type</label>
                <div class="input-group">
-                   {!! Form::select('vehicletype', $AllVehicleTypes->pluck('vehicletype','vehicletype')->prepend('Select a Vehicle Type...',''),null,['class' => 'form-control', 'id'=>'vehicle_types'])!!}
+                   {!! Form::select('vehicletype', $AllVehicleTypes->pluck('vehicletype','vehicletype')->prepend('Select a Vehicle Type...',''),null,['class' => 'form-control', 'id'=>'vehicle_types','required'=>'true'])!!}
                       <div class="form-inline">              
                           <a href="" class="ml-1" data-toggle="modal" data-target="#exampleModalLongsada">
                           <img src="{{asset ('plus-3x.png')}}" width="20px" height="20px"> 
@@ -99,12 +99,17 @@
             <div class="form-group">
                   <label >Vehicle Description</label>
                   <input type="text" class="form-control"  placeholder="Enter Vehicle -  Brand/Model" name="made" required="true">
+                                <div class="text-danger">
+                                      @if($errors->has("made"))
+                                      {{$errors->first("made")}}
+                                      @endif 
+                                </div>
                 
             </div>
 
               <div class="form-group">
                     <label >Delivery Personnel</label>
-                    {!! Form::select('delivery_personnel', $AllPersonnels->pluck('fullname','fullname')->prepend('Select a Delivery Personnel...',''),null,['class' => 'form-control', 'id'=>'personnel-name'])!!}
+                    {!! Form::select('delivery_personnel', $AllPersonnels->pluck('fullname','fullname')->prepend('Select a Delivery Personnel...',''),null,['class' => 'form-control', 'id'=>'personnel-name','required'=>'true'])!!}
 
                                <div class="text-danger">
                                       @if($errors->has("fullname"))
@@ -114,7 +119,7 @@
               </div>
 
              <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                  <button type="submit" class="btn btn-primary" >Submit</button> 
              </div>
 
@@ -249,7 +254,7 @@
 
                 
                  <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary" >Submit</button> 
                 </div>
           </form>

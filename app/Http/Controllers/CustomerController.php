@@ -53,16 +53,15 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-
         try {
             //validation for input customer
             $this->validate($request,[
-                "customer_fname"=>"required",
-                "customer_lname"=>"required",
+                "customer_fname"=>"required|string|alpha",
+                "customer_lname"=>"required|string|alpha",
                 "address"=>"required|string",
-                "birthdate"=>"required|before:now",
-                "contact_no"=>"required",
-                "email_add"=>""
+                "birthdate"=>"required|date|before:-1 year",
+                "contact_no"=>"required|numeric",
+                "email_add"=>"email"
              
             ]);
 
@@ -73,7 +72,7 @@ class CustomerController extends Controller
                 ->withErrors($e->validator);
         }
         
-
+        
         //code for storing data to the table(database)
         $newCustomer = new Customer;
         $newCustomer->customer_fname=$request->customer_fname;
@@ -127,18 +126,17 @@ class CustomerController extends Controller
         try {
             //validation for input customer
             $this->validate($request,[
-                "customer_fname"=>"required|string",
-                "customer_lname"=>"required|string",
+                "customer_fname"=>"required|string|alpha",
+                "customer_lname"=>"required|string|alpha",
                 "address"=>"required|string",
-                "birthdate"=>"required|before:now",
-                "contact_no"=>"required",
+                "birthdate"=>"required|date|before:-1 year",
+                "contact_no"=>"required|numeric",
                 "email_add"=>"email"
              
             ]);
 
         }catch(\Illuminate\Validation\ValidationException $e){
-            // dd($e);
-           return redirect()->route('customers.index')
+            return redirect()->route('customers.index')
                 ->with('open-update-modal', $id)
                 ->withInput($request->all())
                 ->withErrors($e->validator);

@@ -60,10 +60,10 @@ class VehicleController extends Controller
     {
         try {
             $this->validate($request,[
-                "license_plate"=>"required",
+                "license_plate"=>"required|string|unique:vehicles",
                 "vehicletype"=>"required",
-                "made"=>"required",
-                "delivery_personnel"=>"required"
+                "made"=>"required|string|max:20",
+                "delivery_personnel"=>"required|unique:vehicles,delivery_personnel"
             ]);
             
         }catch(\Illuminate\Validation\ValidationException $e){
@@ -79,7 +79,7 @@ class VehicleController extends Controller
         $newVehicle->delivery_personnel=$request->delivery_personnel;
        
         $newVehicle->save();
-        session()->flash('notif',$newVehicle->made.' has been added successfully.');
+        session()->flash('notif','('.$newVehicle->license_plate.') '.$newVehicle->made.' has been added successfully.');
         return redirect()->route('vehicles.index');
     }
 
@@ -118,9 +118,9 @@ class VehicleController extends Controller
     {
         try {
             $this->validate($request,[
-                "license_plate"=>"required",
+                "license_plate"=>"required|string",
                 "vehicletype"=>"required",
-                "made"=>"required",
+                "made"=>"required|string|max:20",
                 "delivery_personnel"=>"required"
             ]);
             
@@ -138,7 +138,7 @@ class VehicleController extends Controller
         $newVehicle->delivery_personnel=$request->delivery_personnel;
 
         $newVehicle->save();
-        session()->flash('update',$newVehicle->made.' has been updated successfully.');
+        session()->flash('update','('.$newVehicle->license_plate.') '.$newVehicle->made.' has been updated successfully.');
         return redirect()->route('vehicles.index');
     }
 
@@ -152,7 +152,7 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::find($id);
         $vehicle->delete();
-        session()->flash('delete',$vehicle->made.' has been deleted successfully.');
+        session()->flash('delete','('.$vehicle->license_plate.') '.$vehicle->made.' has been deleted successfully.');
         return redirect()->route('vehicles.index');
     }
 }

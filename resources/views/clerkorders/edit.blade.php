@@ -120,7 +120,7 @@
 
           <td align="center">
             {!! Form::checkbox("details[{$loop->index}][product_id]", $order->product_id, $order->id, ['class' => 'form-check-input product prc product-has-val']) !!}
-                  <img src="{{asset($order->product->name)}}" width="50px" height="50px">
+                  <img src="{{asset($order->product->image_path)}}" width="50px" height="50px">
             
           </td>
             <td>

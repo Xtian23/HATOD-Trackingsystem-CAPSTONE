@@ -10,7 +10,16 @@ class Product extends Model
     	"name","itemimage","itemname","unit","unitprice","item_description"
     ];
 
+    protected $appends = [
+    	'image_path'
+    ];
+
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+
+    public function getImagePathAttribute()
+    {
+    	return asset("uploads/{$this->itemimage}");
+    }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Input; 
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -21,7 +21,15 @@ class UserController extends Controller
 
    		]);
 
-   		$user=new User;
+   		$user= new User;
+         $user->userimage=$request->userimage;
+        $user->title=Input::get('username');
+
+             if (Input::hasFile('userimage')){
+                $newuser=Input::file('userimage');
+                $newuser->move(public_path().'/', $newuser->getClientOriginalName());
+                $user->name=$newuser->getClientOriginalName();
+            }
    		$user->username=$request->username;
    		$user->fname=$request->fname;
    		$user->lname=$request->lname;
@@ -108,11 +116,24 @@ class UserController extends Controller
 
       ]);
         $user =  User::find($id);
+        //        $user->userimage=$request->userimage;
+        // $user->title=Input::get('username');
+
+        //      if (Input::hasFile('userimage')){
+        //         $newuser=Input::file('userimage');
+        //         $newuser->move(public_path().'/', $newuser->getClientOriginalName());
+        //         $user->name=$newuser->getClientOriginalName();
+        //     }
         $user->username=$request->username;
         $user->fname=$request->fname;
         $user->lname=$request->lname;
         $user->birthdate=$request->birthdate;
-        $user->password=bcrypt($request->password);
+
+        // for uodate password
+        if(trim($request->password)){
+          $user->password=bcrypt($request->password);
+        }
+        
         $user->address=$request->address;
         $user->email_add=$request->email_add;
         $user->contact_no=$request->contact_no;

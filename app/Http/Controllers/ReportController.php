@@ -19,21 +19,22 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         
-        $AllOrders=Order::with(['details.product', 'customer', 'deliveryPersonnel']);
+        // $AllOrders=Order;
 
         $AllCustomers = Customer::all();
         $AllProducts = Product::all();
         $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
 
         $search = $request->search;
-        $AllOrders=Order::when($search, function ($q)use ($search) {
+        $AllOrders=Order::with(['details.product', 'customer', 'deliveryPersonnel', 'clerk'])
+            ->when($search, function ($q)use ($search) {
                 $q->where('customer_id', 'like', "%{$search}%")
                 ->orwhere('order_date', 'like', "%{$search}%")
                 ->orwhere('status', 'like', "%{$search}%")
                 ->orwhere('payment_method', 'like', "%{$search}%")
                 ->orwhere('served_by', 'like', "%{$search}%")
                  ->orwhere('delivered_by', 'like', "%{$search}%");
-        })->orderBy('order_date')->paginate(10);
+            })->orderBy('order_date')->paginate(10);
 
       
         return view('report',[

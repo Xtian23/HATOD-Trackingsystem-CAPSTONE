@@ -180,7 +180,10 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::find($id);
-        $order->delete(); //deletion of the selected id
+        $orderline = OrderLine::find($id);
+        $order->delete(); 
+        $orderline->delete();
+        //deletion of the selected id
         // session()->flash('delete',$customer->customer_fname.' '. $customer->customer_lname.' has been deleted Successfully.');//displaying notification for success deletion into the database
         return redirect()->route('orders.index');
     }

@@ -126,8 +126,8 @@ class CustomerController extends Controller
         try {
             //validation for input customer
             $this->validate($request,[
-                "customer_fname"=>"required|regex:/^[a-zA-Z0-9\s]+$/",
-                "customer_lname"=>"required|regex:/^[a-zA-Z0-9\s]+$/",
+                   "customer_fname"=>"required|string|alpha",
+                "customer_lname"=>"required|string|alpha",
                 "address"=>"required|string",
                 "birthdate"=>"required|date|before:-1 year",
                 "contact_no"=>"required|numeric|digits:11",

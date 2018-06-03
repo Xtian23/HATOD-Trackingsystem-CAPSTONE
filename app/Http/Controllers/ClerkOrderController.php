@@ -30,11 +30,14 @@ class ClerkOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $AllCustomers = Customer::all();
-        $AllProducts = Product::all();
         $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
+        $search = $request->search;
+        $AllProducts = Product::when($search, function ($q)use ($search) {
+            $q->where('itemname', 'like', "%{$search}%");
+             })->orderBy('itemname','asc')->paginate(10);;
 
         return view('clerkorders.addOrder',[
             'AllCustomers'=>$AllCustomers,'products'=>$AllProducts,'AllPersonnels'=>$AllPersonnels

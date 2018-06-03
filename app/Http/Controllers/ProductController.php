@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Unit;
+use Illuminate\validation\Rule;
 
 
 class ProductController extends Controller
@@ -77,14 +78,17 @@ class ProductController extends Controller
         }
 
         $newProduct = new Product;
-        $newProduct->itemimage=$request->itemimage;
+        // $newProduct->itemimage=$request->itemimage;
         $newProduct->title=Input::get('item_description');
 
-             if (Input::hasFile('itemimage')){
-                $product=Input::file('itemimage');
-                $product->move(public_path().'/', $product->getClientOriginalName());
-                $newProduct->name=$product->getClientOriginalName();
-            }
+        $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
+
+        $newProduct->name = '  ';
+        //  if (Input::hasFile('itemimage')){
+        //     $product=Input::file('itemimage');
+        //     $product->move(public_path().'/', $product->getClientOriginalName());
+        //     $newProduct->name=$product->getClientOriginalName();
+        // }
 
         $newProduct->itemname=$request->itemname;
         $newProduct->unit=$request->unit;
@@ -134,7 +138,9 @@ class ProductController extends Controller
         //validation for input products
             $this->validate($request,[
             "itemimage"=>"nullable|image",
-            "itemname"=>"required|string",
+            "itemname"=> ['required', 'string', Rule::unique('products')->where(function ($q) use ($id){
+                return $q->where('id', '!=', $id)->whereNull('deleted_at');
+            })],
             "item_description"=>"required|string|max:150",
             "unitprice"=>"required",
             "unit"=>"required"
@@ -151,11 +157,17 @@ class ProductController extends Controller
         $newProduct->itemimage=$request->itemimage;
         $newProduct->title=Input::get('item_description');
 
-                 if (Input::hasFile('itemimage')){
-                    $product=Input::file('itemimage');
-                    $product->move(public_path().'/', $product->getClientOriginalName());
-                    $newProduct->name=$product->getClientOriginalName();
-                }
+        if($request->hasFile('itemimage')){
+            $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
+        }
+
+        $newProduct->name = '  ';
+
+                //  if (Input::hasFile('itemimage')){
+                //     $product=Input::file('itemimage');
+                //     $product->move(public_path().'/', $product->getClientOriginalName());
+                //     $newProduct->name=$product->getClientOriginalName();
+                // }
 
         $newProduct->itemname=$request->itemname;
         $newProduct->unit=$request->unit;

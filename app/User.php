@@ -8,11 +8,12 @@ use Carbon\Carbon;
 class User extends Authenticatable
 {
     protected $fillable=[
-    	"username","fname","lname","birthdate","password","password_confirmation","address","email_add","contact_no","usertype"
+    	"username","fname","lname","birthdate","password","password_confirmation","address","email_add","contact_no","usertype","title","userimage","name"
     ];
 
      protected $appends=[
-    	"age"
+    	"age",
+        'fullname'
     ];
 
     public function getAgeAttribute()
@@ -23,4 +24,9 @@ class User extends Authenticatable
     
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+
+    public function getFullnameAttribute()
+    {
+        return "{$this->fname} {$this->lname}";
+    }
 }

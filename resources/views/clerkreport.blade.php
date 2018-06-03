@@ -2,7 +2,16 @@
 @section('title','CLERK REPORTS')
 @section('content')
 
-
+<style type="text/css">
+  @media print {
+    button{
+      display:none!important;
+    }
+    .no-print{
+      display: none!important;
+    }
+  }
+</style>
 
 <div class="mx-auto offset-md-4 bg-light col-md-11 mt-1 form-control" >
 <table class="table">
@@ -10,61 +19,43 @@
 
   <div class="text-left" >
 <!--     <a href="{{route('orders.create') }}"  class="btn btn-primary  " role="button" aria-pressed="true">Add Order</a> -->
-<div>
-    <a href="{{url('/clerkprintable') }}"  class="btn btn-primary  btn-sm" role="button" aria-pressed="true"><img src="{{'/print.png'}}" width="20px"> Print</a>
-</div>
   <div class="text-center  mt-3">
       <h3>CLERK REPORT LIST</h3>
   </div>
   </div>
 
 
-<div class=" col-md-12  ml-1" >
+<div class=" col-md-12  ml-1 no-print" >
 
 
-   <div class="mt-4 mb-2 ">
+   <div class="mt-4 mb-2 offset-md-2">
      <div class="form-row text-center  ">
-      <form action="" method="POST">
+      <form action="{{ url()->current() }}" method="GET">
 
-           <div class="form-group col-md-2">
-              <label for="exampleFormControlSelect2"><b>Choose</b></label>
-                <select class="form-control" id="exampleFormControlSelect2">
-                    <option>weekly</option> 
-                    <option>monthly</option>
-                    <option>yearly</option>
-                </select>
-           </div>
-
+      
             <div class="form-group col-md-2">
                 <label ><b>Start Date</b></label>
-                <input type="date" class="form-control">
+                <input type="date" class="form-control" name="start_date">
             </div>
  
 
            <div class="form-group col-md-2">
                 <label for="exampleFormControlSelect2"><b>End Date</b></label>
-                <input type="date" class="form-control">
+                <input type="date" class="form-control"  name="end_date">
            </div>
        
            <div class="form-group col-md-3">
             <label for="exampleFormControlSelect2"><b>Customers</b></label>
-              <select class="form-control" id="exampleFormControlSelect2">
-                <option>JanJan Ambot</option>
-                <option>Rebicca Manos</option>
-                <option>Gian Kaindoy</option>
-              </select>
+            {!! Form::select('customer_id',  $customers->prepend('* SELELCT *', ''), null, ['class' => 'form-control select2']) !!}
            </div>
 
             <div class="form-group col-md-2">
             <label for="exampleFormControlSelect2"><b>Status</b></label>
-              <select class="form-control" id="exampleFormControlSelect2">
-                <option>RECEIVED</option>
-                <option>DELIVERED</option>
-              </select>
+            {!! Form::select('status', $status->prepend('* SELECT *', ''), null, ['class' => 'form-control select2']) !!}
             </div>
 
             <div class="form-inline col-md-1" >
-             <button type="button" class="btn btn-primary"><img src="/filter.png" width="20px"> Filter</button>
+             <button type="submit" class="btn btn-primary"><img src="/filter.png" width="20px"> Filter</button>
            </div>
 
          </form>  
@@ -83,7 +74,7 @@
       <th>Delivered By</th>
       <th>Status</th>
       <th>Total Amount</th>
-      <th class="text-center">
+      <th class="text-center no-print">
         <span></span>
           Action  
       </th>
@@ -101,7 +92,7 @@
         <td>{{ $row->deliveryPersonnel->fullname }}</td>
         <td>{{ $row->status}}</td>
         <td class="text-right">{{ number_format($row->total, 2) }}</td>
-        <td>    <!-- Button trigger modal -->
+        <td class="no-print">    <!-- Button trigger modal -->
           <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalLong"><img src="/view.png" width="20px"> View</button>
         </td>
        

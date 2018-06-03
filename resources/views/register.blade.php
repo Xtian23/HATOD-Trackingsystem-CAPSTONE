@@ -36,8 +36,22 @@
 			      @endif
 
 				<!-- end -->
-				<form action="{{url('/register')}}" method="post" >
+				<form action="{{url('/register')}}" method="post" enctype="multipart/form-data">
 				{{csrf_field()}}
+<!-- start image -->
+				<div class="form-group form-control" align="center">
+                        
+                            <input type="file" name="userimage" value="Upload Image" id="fileToUpload" required="true">
+
+                              <div class="text-danger">
+                                @if($errors->has("userimage"))
+                                {{$errors->first("userimage")}}
+                                @endif 
+                            </div>
+                          
+          
+                  </div> 
+<!--end image -->
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label">Username:</label>
 					  <div class="col-sm-8">	

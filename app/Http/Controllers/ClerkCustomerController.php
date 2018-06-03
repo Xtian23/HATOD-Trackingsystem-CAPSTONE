@@ -120,6 +120,7 @@ class ClerkCustomerController extends Controller
     {   
           try {
             //validation for input customer
+                 $this->validate($request,[
                 "customer_fname"=>"required|string|alpha",
                 "customer_lname"=>"required|string|alpha",
                 "address"=>"required|string",

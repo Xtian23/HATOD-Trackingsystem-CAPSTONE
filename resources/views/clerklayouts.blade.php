@@ -5,8 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('js/bootstrap.min.js')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('select2/dist/css/select2.min.css') }}">
   <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('select2/dist/js/select2.full.min.js')}}"></script>
+
  
 	<!-- end-->
 	
@@ -172,6 +175,10 @@
 
 
 @stack('js')
-
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.select2').select2();
+  })
+</script>
 </body>
 </html>

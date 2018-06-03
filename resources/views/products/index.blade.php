@@ -179,7 +179,7 @@
         <tbody>
         @foreach($products as $product)
           <tr>
-              <td><img src="{{$product->name}}" width="40px" height="40px"></td>
+              <td><img src="{{$product->image_path}}" width="40px" height="40px"></td>
               <td><div class="text-left">{{$product->itemname}}</div></td>
               <td>{{$product->item_description}}</td>
               <td><b>{{$product->unit}}</b></td>
@@ -211,14 +211,13 @@
                 </div>
 
                 <div class="modal-body">
-
                 <div class="card-body">
-                <form action="{{'/products/'.$product->id,'/edit'}}" method="POST">
+                <form action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data" method="POST">
                  {{csrf_field()}}
                  {{method_field('PUT')}}
                         <!-- code for file-upload -->  
                                <div class="form-group form-control" align="center">
-                                      <img src="{{$product->name}}" class="form-control" width="20%" height="30%">
+                                      <img src="{{$product->image_path}}" class="form-control" width="20%" height="30%">
                                       <input type="file" name="itemimage" value="Upload Image" id="fileToUpload">
                                      
                               </div> 
@@ -347,19 +346,19 @@
 
                                       <tbody class="text-center">
                                         @foreach($AllUnits as $unit)
-                                        <form action="{{'/units/'.$unit->id,'/destroy'}}" method="POST">
-
-                                         {{csrf_field()}}
-                                         {{method_field('delete')}}
                                         <tr>
                                           <td>{{$unit->unit}}</td>
                                           <td>
-                                             <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Product?')"><img src="/delete.png" height="16px">Delete</button>
+                                              <form action="{{'/units/'.$unit->id,'/destroy'}}" method="POST">
+                                                  {{csrf_field()}}
+                                                  {{method_field('delete')}}
+                                                  <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Product?')"><img src="/delete.png" height="16px">Delete</button>
+                                              </form>
                                           </td>
                                         </tr>
                                         @endforeach
                                       </tbody>
-                                      </form>
+                                      
                                     </table>
                                   </div>
                                 

@@ -3,39 +3,63 @@
 @section('contentz')
 
 
+<style type="text/css">
+  @media print {
+    button{
+      display:none!important;
+    }
+    .no-print{
+      display: none!important;
+    }
+  }
+</style>
 
 <div class="mx-auto offset-md-4 bg-light col-md-11 mt-1 form-control" >
 <table class="table">
 
 
   <div class="text-left" >
-<div>
-    <a href="{{url('/printable') }}"  class="btn btn-primary  btn-sm" role="button" aria-pressed="true"><img src="{{'/print.png'}}" width="20px"> Print</a>
-</div>
-    
+<!--     <a href="{{route('orders.create') }}"  class="btn btn-primary  " role="button" aria-pressed="true">Add Order</a> -->
   <div class="text-center  mt-3">
-      <h3>ADMIN REPORT LIST </h3>
+      <h3>CLERK REPORT LIST</h3>
   </div>
   </div>
 
 
-<div class=" col-md-12  ml-1" >
+<div class=" col-md-12  ml-1 no-print" >
 
 
-   <div class="mt-4 mb-2 ">
+   <div class="mt-4 mb-2 offset-md-2">
      <div class="form-row text-center  ">
+      <form action="{{ url()->current() }}" method="GET">
 
+      
+            <div class="form-group col-md-2">
+                <label ><b>Start Date</b></label>
+               
+                <input type="date" class="form-control start_date" name="start_date">
+            </div>
+ 
 
-    <!-- Start Code for Search BOX Upper Right -->
-      {!! Form::open(['method'=>'GET','url' => route('orders.index'),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
-      <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
-          <input type="text" class="form-control" name="search"  placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary"><img src="/filter.png" width="20px"> Filter</button>
-          </span>
-      </div>
-      {!! Form::close() !!}
-      <!-- END Code for Search BOX Upper Right -->
+           <div class="form-group col-md-2">
+                <label for="exampleFormControlSelect2"><b>End Date</b></label>
+ 
+                <input type="date" class="form-control end_date"  name="end_date">
+           </div>
+       
+           <div class="form-group col-md-3">
+            <label for="exampleFormControlSelect2"><b>Customers</b></label>
+            {!! Form::select('customer_id',  $customers->prepend('Select Customer Name', ''), null, ['class' => 'form-control select2']) !!}
+           </div>
+
+            <div class="form-group col-md-2">
+            <label for="exampleFormControlSelect2"><b>Status</b></label>
+            {!! Form::select('status', $status->prepend('Select  Status', ''), null, ['class' => 'form-control select2']) !!}
+            </div>
+
+            <div class="form-inline col-md-1" >
+             <button type="submit" class="btn btn-primary"><img src="/filter.png" width="20px"> Filter</button>
+           </div>
 
          </form>  
     </div>
@@ -65,7 +89,7 @@
     @foreach($orders as $row)
       <tr>
         <td>{{ $row->id }}</td>
-        <td>{{ date_create($row->order_date)->format('M d, Y ') }}</td>
+        <td>{{ date_create($row->created_at)->format('M d, Y h:i a') }}</td>
         <td>{{ $row->customer->fullname}}</td>
         <td>{{ $row->customer->address }}</td>
         <td>{{ $row->deliveryPersonnel->fullname }}</td>

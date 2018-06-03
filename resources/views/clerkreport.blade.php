@@ -35,23 +35,25 @@
       
             <div class="form-group col-md-2">
                 <label ><b>Start Date</b></label>
-                <input type="date" class="form-control" name="start_date">
+               
+                <input type="date" class="form-control start_date" name="start_date">
             </div>
  
 
            <div class="form-group col-md-2">
                 <label for="exampleFormControlSelect2"><b>End Date</b></label>
-                <input type="date" class="form-control"  name="end_date">
+ 
+                <input type="date" class="form-control end_date"  name="end_date">
            </div>
        
            <div class="form-group col-md-3">
             <label for="exampleFormControlSelect2"><b>Customers</b></label>
-            {!! Form::select('customer_id',  $customers->prepend('* SELELCT *', ''), null, ['class' => 'form-control select2']) !!}
+            {!! Form::select('customer_id',  $customers->prepend('Select Customer Name', ''), null, ['class' => 'form-control select2']) !!}
            </div>
 
             <div class="form-group col-md-2">
             <label for="exampleFormControlSelect2"><b>Status</b></label>
-            {!! Form::select('status', $status->prepend('* SELECT *', ''), null, ['class' => 'form-control select2']) !!}
+            {!! Form::select('status', $status->prepend('Select  Status', ''), null, ['class' => 'form-control select2']) !!}
             </div>
 
             <div class="form-inline col-md-1" >
@@ -86,7 +88,7 @@
     @foreach($orders as $row)
       <tr>
         <td>{{ $row->id }}</td>
-        <td>{{ date_create($row->order_date)->format('M d, Y') }}</td>
+        <td>{{ date_create($row->created_at)->format('M d, Y h:i a') }}</td>
         <td>{{ $row->customer->fullname}}</td>
         <td>{{ $row->customer->address }}</td>
         <td>{{ $row->deliveryPersonnel->fullname }}</td>
@@ -193,6 +195,6 @@
     </table>
   </div>
 </div>    
- -->
+
 
 @endsection

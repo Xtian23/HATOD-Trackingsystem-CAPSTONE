@@ -19,26 +19,25 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         
-        // $AllOrders=Order;
-
-        $AllCustomers = Customer::all();
-        $AllProducts = Product::all();
-        $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
-
-        $search = $request->search;
-        $AllOrders=Order::with(['details.product', 'customer', 'deliveryPersonnel', 'clerk'])
-            ->when($search, function ($q)use ($search) {
-                $q->where('customer_id', 'like', "%{$search}%")
-                ->orwhere('order_date', 'like', "%{$search}%")
-                ->orwhere('status', 'like', "%{$search}%")
-                ->orwhere('payment_method', 'like', "%{$search}%")
-                ->orwhere('served_by', 'like', "%{$search}%")
-                 ->orwhere('delivered_by', 'like', "%{$search}%");
-            })->orderBy('order_date')->paginate(10);
+    $AllOrders=Order::with(['details', 'deliveryPersonnel', 'clerk'])
+            ->when($request->start_date, function ($q) use ($request) {
+                $q->where('order_date', '>=', $request->start_date);
+            })
+            ->when($request->end_date, function ($q) use ($request) {
+                $q->where('order_date', '<=', $request->end_date);
+            })
+            ->when($request->customer_id, function ($q) use ($request) {
+                $q->where('customer_id', $request->customer_id);
+            })
+            ->when($request->status, function ($q) use ($request) {
+                $q->where('status', $request->status);
+            });
 
       
         return view('report',[
-            'orders'=>$AllOrders
+            'orders'=>$AllOrders->orderBy('order_date')->paginate(10),
+            'customers' => Customer::all()->pluck('fullname', 'id'),
+            'status' => collect(['pending' => 'Pending', 'processed' => 'Proceessed', 'delivered' => 'Delivered', 'received' => 'Receieved'])
         ]);
     }
 

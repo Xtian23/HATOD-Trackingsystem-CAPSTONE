@@ -33,7 +33,7 @@
 
 			            <a href="{{url('/login')}}"><u>Here</u></a>
 			        </div>
-			      @endif
+			      @endif	 
 
 				<!-- end -->
 				<form action="{{url('/register')}}" method="post" enctype="multipart/form-data">

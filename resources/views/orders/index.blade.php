@@ -69,13 +69,13 @@
     @foreach($orders as $row)
       <tr>
         <td>{{ $row->id }}</td>
-        <td>{{ date_create($row->order_date)->format('M d, Y') }}</td>
+        <td>{{ date_create($row->created_at)->format('M d, Y h:i a') }}</td>
         <td>{{ $row->customer->fullname}}</td>
         <td>{{ $row->customer->address }}</td>
         <td>{{ $row->deliveryPersonnel->fullname }}</td>
     <!--     <td>{{ $row->served_by}}</td> -->
         <td>{{ $row->status}}</td>
-        <td class="text-right">{{ number_format($row->total, 2) }}</td>
+        <td class="text-center">{{ number_format($row->total, 2) }}</td>
           <td width="15%">
                <form action="" method="post">
                       <a href="{{ route('orders.edit', $row->id) }}" class="btn btn-primary btn-sm"><img src="/edit.png" height="15px"> Edit</a>

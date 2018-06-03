@@ -33,6 +33,11 @@ body{
   cursor: pointer;
 
 }
+.start_date,.end_date{
+  height: 28px;
+
+
+}
 
 
 

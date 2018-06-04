@@ -1,4 +1,4 @@
-k<?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -32,11 +32,17 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $AllCustomers = Customer::all();
         $AllProducts = Product::all();
         $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
+
+        $search = $request->search;
+        $AllProducts = Product::when($search, function ($q)use ($search) {
+            $q->where('itemname', 'like', "%{$search}%");
+             })->orderBy('itemname','asc')->paginate(10);;
+
 
         return view('orders.addOrder',[
             'AllCustomers'=>$AllCustomers,'products'=>$AllProducts,'AllPersonnels'=>$AllPersonnels
@@ -97,22 +103,21 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        // $orders = Order::find($id);
-        
-        
-        // return view('orders.editOrder',[
-        //     'orders'=>$orders,
-        //     
-        // ]);
-
+    
         $orders = Order::with(['details.product', 'customer', 'deliveryPersonnel'])->whereId($id)->first();
         // dd($orders->toArray());
 
         $AllCustomers = Customer::all();
         $AllProducts = Product::all();
         $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
+
+        $search = $request->search;
+        $AllProducts = Product::when($search, function ($q)use ($search) {
+            $q->where('itemname', 'like', "%{$search}%");
+             })->orderBy('itemname','asc')->paginate(10);;
+
 
 
         return view('orders.edit', [

@@ -83,10 +83,8 @@
   
      </div>
      </form>
-<!-- 
-
-        {!! Form::open(['method'=>'GET','url' => route('orders.index'),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
-            <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
+ 
+   {!! Form::open(['method'=>'GET','url' => route('orders.edit',['id' => $orders->id]),'class'=>'navbar-form navbar-left','role'=>'search'])  !!} <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
                 <input type="text" class="form-control" name="search"  placeholder="Search...">
                 <span class="input-group-btn">
                     <button class="btn btn-primary ml" type="submit">
@@ -94,7 +92,7 @@
                     </button>
                 </span>
             </div>
-            {!! Form::close() !!} -->
+            {!! Form::close() !!}
 
      <!-- Codes for table- -->
 

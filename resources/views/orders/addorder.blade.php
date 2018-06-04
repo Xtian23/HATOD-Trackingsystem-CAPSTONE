@@ -112,7 +112,7 @@
         </div>
    </div>
      </form>
-        {!! Form::open(['method'=>'GET','url' => route('products.index'),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+        {!! Form::open(['method'=>'GET','url' => route('orders.create'),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
             <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
                 <input type="text" class="form-control" name="search"  placeholder="Search...">
                 <span class="input-group-btn">

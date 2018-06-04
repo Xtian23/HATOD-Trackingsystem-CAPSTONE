@@ -13,7 +13,8 @@ class User extends Authenticatable
 
      protected $appends=[
     	"age",
-        'fullname'
+        'fullname',
+        'image_path'
     ];
 
     public function getAgeAttribute()
@@ -28,5 +29,11 @@ class User extends Authenticatable
     public function getFullnameAttribute()
     {
         return "{$this->fname} {$this->lname}";
+    }
+
+
+    public function getImagePathAttribute()
+    {
+        return asset("uploads/{$this->userimage}");
     }
 }

@@ -22,14 +22,13 @@ class UserController extends Controller
    		]);
 
    		$user= new User;
-         $user->userimage=$request->userimage;
-        $user->title=Input::get('username');
 
-             if (Input::hasFile('userimage')){
-                $newuser=Input::file('userimage');
-                $newuser->move(public_path().'/', $newuser->getClientOriginalName());
-                $user->name=$newuser->getClientOriginalName();
-            }
+        
+        $user->title=Input::get('username');
+        $user->userimage = $request->file('userimage')->store('user-images', 'public');
+
+       
+
    		$user->username=$request->username;
    		$user->fname=$request->fname;
    		$user->lname=$request->lname;

@@ -21,7 +21,7 @@
   <div class="text-left" >
 <!--     <a href="{{route('orders.create') }}"  class="btn btn-primary  " role="button" aria-pressed="true">Add Order</a> -->
   <div class="text-center  mt-3">
-      <h3>CLERK REPORT LIST</h3>
+      <h3>ADMIN REPORT LIST</h3>
   </div>
   </div>
 

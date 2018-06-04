@@ -14,7 +14,7 @@
   <!-- IMAGE -->
     <div>
       <div class="card mx-auto" style="width: 10rem;">
-        <img src="avatar.png" class="card-img" alt="Nice photo ;)">
+        <img src="{{Auth::user()->image_path}}" class="card-img" alt="Nice photo ;)">
       </div>
     </div>
 

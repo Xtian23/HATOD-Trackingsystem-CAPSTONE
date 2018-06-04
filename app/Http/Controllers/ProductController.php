@@ -157,12 +157,7 @@ class ProductController extends Controller
 
         $newProduct->name = '  ';
 
-                //  if (Input::hasFile('itemimage')){
-                //     $product=Input::file('itemimage');
-                //     $product->move(public_path().'/', $product->getClientOriginalName());
-                //     $newProduct->name=$product->getClientOriginalName();
-                // }
-
+  
         $newProduct->itemname=$request->itemname;
         $newProduct->unit=$request->unit;
         $newProduct->unitprice=$request->unitprice;

@@ -12,17 +12,22 @@
       </div>
     </div>
   <!-- IMAGE -->
-    <div>
+    
+    <div class="card-body">
+      <form action="{{'/user/'.Auth::user()->id,'/edit'}}" method="POST" enctype="multipart/form-data" >
+        {{csrf_field()}}
+        {{method_field('PUT')}}
+
+<div>
       <div class="card mx-auto" style="width: 10rem;">
         <img src="{{Auth::user()->image_path}}" class="card-img" alt="Nice photo ;)">
+
       </div>
+         <input type="file" class="offset-md-5 mt-3" name="userimage" value="Upload Image" id="fileToUpload">
     </div>
 
 
-    <div class="card-body">
-      <form action="{{'/user/'.Auth::user()->id,'/edit'}}" method="POST">
-        {{csrf_field()}}
-        {{method_field('PUT')}}
+
 
         <div class="form-group">
           <div class="row">

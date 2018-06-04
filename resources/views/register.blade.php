@@ -147,35 +147,26 @@
 						
 					</div>
 
-					<div class="form-group row">
-					
-					<input type="hidden" name="usertype" value="admin">
-					@if($errors->has("contact_no"))
-					{{$errors->first("contact_no")}}
-					@endif 
-					</div>
+							<div class="form-group row">
+								<input type="hidden" name="usertype" value="admin">
+							</div>
 						
 					</div>
 					
 					
-					
+					    <div class="text-center">
+							<button class="btn btn-primary" type="submit">SUBMIT</button>
+						</div>
 
-					
-					
-					
-				    <div class="text-center">
-						<button class="btn btn-primary" type="submit">SUBMIT</button>
+					<div class="text-center mt-2"><a href="{{url('/login')}}"><u>Already have an account? Login</u></a>
+
+
 					</div>
-					<div class="text-center mt-2"><a href="{{url('/login')}}"><u>Already have an account? Login</u></a></div>
 				</form>			
 			</div>
-		</div>
-		</div>
-	</div>
-	
-</div>
-
-
-
+		 </div>
+	  </div>
+	 </div>
+ </div>
 </body>
 </html>

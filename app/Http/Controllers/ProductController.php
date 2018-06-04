@@ -131,7 +131,7 @@ class ProductController extends Controller
         try {
         //validation for input products
             $this->validate($request,[
-            "itemimage"=>"nullable|image",
+            "itemimage"=>"image",
             "itemname"=> ['required', 'string', Rule::unique('products')->where(function ($q) use ($id){
                 return $q->where('id', '!=', $id)->whereNull('deleted_at');
             })],
@@ -148,6 +148,7 @@ class ProductController extends Controller
         }
 
         $newProduct = Product::find($id);
+        
         $newProduct->itemimage=$request->itemimage;
         $newProduct->title=Input::get('item_description');
 

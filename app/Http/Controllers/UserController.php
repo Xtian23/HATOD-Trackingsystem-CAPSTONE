@@ -12,10 +12,11 @@ class UserController extends Controller
    {  
    		// return $request->username.$request->fname.$request->lname;
    		$this->validate($request,[
+        "userimage"=>"image",
    			"username"=>"required|string|unique:users",
-   			"fname"=>"required|string",
-   			"lname"=>"required|string",
-   			"birthdate"=>"required",
+   			"fname"=>"required|string|alpha",
+   			"lname"=>"required|string|alpha",
+   			"birthdate"=>"required|before:-1 year|date",
    			"password"=>"required|min:4|same:password_confirmation",
    			"password_confirmation"=>"same:password"
 
@@ -105,14 +106,14 @@ class UserController extends Controller
     {
 
 
-          $this->validate($request,[
-            "userimage"=>"image",
-        "username"=>"string|nullable",
-        "fname"=>"string",
-        "lname"=>"string",
-        "birthdate"=>"date",
-        "password"=>"min:4|same:password_confirmation|nullable",
-        "password_confirmation"=>"same:password|nullable"
+        $this->validate($request,[
+        "userimage"=>"image",
+        "username"=>"required|string",
+        "fname"=>"required|string|alpha",
+        "lname"=>"required|string|alpha",
+        "birthdate"=>"required|before:-1 year|date",
+        "password"=>"nullable|min:4|same:password_confirmation",
+        "password_confirmation"=>"nullable|same:password"
 
       ]);
         $user =  User::find($id);

@@ -31,18 +31,18 @@
 
         <div class="form-group">
           <div class="row">
-            <div class="form-group col-4 offset-md-1">
+            <div class="form-group col-4 offset-md-1 text-center">
               <label><b>Username</b></label>
-              <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="{{Auth::user()->username}}">
+              <input type="text" class="form-control text-center" placeholder="Username" id="username" name="username" value="{{Auth::user()->username}}">
               <div class="text-danger">
               @if($errors->has("username"))
                {{$errors->first("username")}}
               @endif 
             </div>
             </div>
-            <div class="form-group col-4 offset-md-1">
+            <div class="form-group col-4 offset-md-2 text-center">
               <label><b>User Type</b></label>
-              <input type="text" class="form-control" placeholder="User Type" id="usertype" name="usertype" value="{{Auth::user()->usertype}}" readonly>
+              <input type="text" class="form-control text-center" placeholder="User Type" id="usertype" name="usertype" value="{{Auth::user()->usertype}}" readonly>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
         <div class="row">
           <div class="form-group col-6">
             <label><b>Change Password</b></label>
-            <input type="password" class="form-control"  name="password">
+            <input type="password" class="form-control"  name="password" placeholder="Enter New Password">
             <div class="text-danger">
               @if($errors->has("password"))
                {{$errors->first("password")}}
@@ -127,7 +127,7 @@
           </div>
           <div class="form-group col-6">
             <label><b>Confirm Password</b></label>
-            <input type="password" class="form-control" name="password_confirmation">
+            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
           </div>
         </div>
 <br><hr>

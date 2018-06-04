@@ -118,10 +118,10 @@ class VehicleController extends Controller
     {
         try {
             $this->validate($request,[
-                "license_plate"=>"required|string|unique:vehicles|regex:/^[a-zA-Z0-9\s]+$/",
+                "license_plate"=>"required|string",
                 "vehicletype"=>"required",
                 "made"=>"required|string",
-                "delivery_personnel"=>"required"
+                "delivery_personnel"=>"required|unique:vehicles,delivery_personnel"
             ]);
             
         }catch(\Illuminate\Validation\ValidationException $e){

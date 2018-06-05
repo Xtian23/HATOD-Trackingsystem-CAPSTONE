@@ -2,9 +2,8 @@
 
 namespace App;
 
-
-use Illuminate\Database\Eloquent\Model;
 use App\Order;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderLine extends Model
 {
@@ -12,16 +11,16 @@ class OrderLine extends Model
         'order_id',
         'product_id',
         'quantity',
-        'unit_price'
+        'unit_price',
     ];
 
     protected $appends = [
-        'subtotal'
+        'subtotal',
     ];
 
     protected $casts = [
-        'quantity' => 'float', 
-        'unit_price' => 'float', 
+        'quantity' => 'float',
+        'unit_price' => 'float',
     ];
 
     public function getSubtotalAttribute()

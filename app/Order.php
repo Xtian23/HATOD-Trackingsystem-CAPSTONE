@@ -2,30 +2,27 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Customer;
+use App\Facades\SMS;
 use App\OrderLine;
 use App\Personnel;
-use App\Customer;
 use App\User;
-use App\Facades\SMS;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'customer_id',
         'order_date',
         'payment_method',
         'served_by',
         'delivered_by',
-        'status'
+        'status',
     ];
 
     protected $appends = [
-        'total'
+        'total',
     ];
-
-
-
 
     public function details()
     {
@@ -37,12 +34,10 @@ class Order extends Model
         return $this->belongsTo(User::class, 'served_by');
     }
 
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
-
 
     public function deliveryPersonnel()
     {
@@ -54,11 +49,27 @@ class Order extends Model
         return $this->details->sum('subtotal');
     }
 
-     public function notifyCustomer()
+    public function notifyCustomer()
     {
         $message = new SMS($this->customer->contact_no, "Good Day Maam/Sir, Your order is now being Processed.H.A.T.O.D. Tracking System
             ");
         return $message->send();
+    }
+
+    public function scopeUndelivered($query, $deliveryPersonnelId = false)
+    {
+        return $query->latest()
+            ->where('status', '!=', 'received')
+            ->when($deliveryPersonnelId, function ($q) use ($deliveryPersonnelId) {
+                $q->whereDeliveredBy($deliveryPersonnelId);
+            });
+    }
+
+    public function scopeSet($query, $orderStatus)
+    {
+        return $query->update([
+            'status' => $orderStatus,
+        ]);
     }
 
 }

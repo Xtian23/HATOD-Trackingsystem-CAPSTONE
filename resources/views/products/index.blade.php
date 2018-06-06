@@ -218,7 +218,7 @@
                         <!-- code for file-upload -->  
                                <div class="form-group form-control" align="center">
                                       <img src="{{$product->image_path}}" class="form-control" width="20%" height="30%">
-                                      <input type="file" name="itemimage" value="Upload Image" id="fileToUpload">
+                                      <input type="file" name="itemimage" value="{{$product->image_path}}" id="fileToUpload">
                                      
                               </div> 
                       

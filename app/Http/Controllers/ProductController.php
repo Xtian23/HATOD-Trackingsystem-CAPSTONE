@@ -148,16 +148,13 @@ class ProductController extends Controller
         }
 
         $newProduct = Product::find($id);
-        
-        $newProduct->itemimage=$request->itemimage;
+        // $newProduct->itemimage=$request->itemimage;
         $newProduct->title=Input::get('item_description');
 
         if($request->hasFile('itemimage')){
             $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
         }
-
         $newProduct->name = '  ';
-
   
         $newProduct->itemname=$request->itemname;
         $newProduct->unit=$request->unit;

@@ -16,7 +16,11 @@ class DriverRouteLog extends Model
 
     public function scopeLatestByPersonnel($query)
     {
-        return $query->selectRaw('MAX(lat) AS lat, MAX(lng) AS lng, personnel_id')
-            ->groupBy('personnel_id');
+        $latest = self::selectRaw('MAX(id) AS id')
+            ->groupBy('personnel_id')
+            ->get();
+
+        return $query->selectRaw('lat, lng, personnel_id, order_id, id')
+            ->whereIn('id', $latest->pluck('id'));
     }
 }

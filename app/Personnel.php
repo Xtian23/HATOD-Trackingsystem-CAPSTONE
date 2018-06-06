@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Personnel extends Model
 {
     protected $fillable = [
-        "personnel_fname", "personnel_lname", "address", "birthdate", "contact_no", "personnel_type", "usertype", "color", 'user_id',
+        "personnel_fname", "personnel_lname", "address", "birthdate", "contact_no", "personnel_type", "usertype", "color", 'user_id', 'color',
     ];
 
     protected $appends = [
@@ -35,5 +35,10 @@ class Personnel extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeDriver($query)
+    {
+        return $query->whereNotNull('user_id');
     }
 }

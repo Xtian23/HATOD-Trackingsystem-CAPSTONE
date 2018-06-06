@@ -9,9 +9,9 @@
   <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('select2/dist/js/select2.full.min.js')}}"></script>
-
+  @stack('css')
 	<!-- end-->
-	
+
 
 <title>@yield('title')</title>
 
@@ -51,16 +51,16 @@
               <li class="nav-item active">
                 <a class="nav-link" href="https://liteonebiz.tech/kaindoy/hatudlocation.html">Track</a>
               </li>
-             
+
 
 
                  <li class="nav-item active">
                     <a class="nav-link" href="/report">Report</a>
                   </li>
-         
+
               <!-- end -->
                   <li class="nav-item active dropdown">
-         
+
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  Hello, {{Auth::user()->fname}}!
                 </a>
@@ -70,7 +70,7 @@
                   <a class="dropdown-item" href="{{url('/logout')}}"><img src="/logout.png" width="18px"> Logout</a>
                 </div>
                   </li>
-          
+
 
           </ul>
         </div>
@@ -80,7 +80,7 @@
           	  <a href="http://localhost:8000/index"> <img src="{{asset ('logo1.png')}}" ></a>
           </div>
 
-                
+
 
 
 
@@ -91,26 +91,26 @@
         <div class="modal-dialog modal-dialog-centere " role="document">
           <div class="modal-content ">
             <div class="modal-header ">
-              <h5 class="modal-title" id="exampleModalCenterTitle">User Profile 
+              <h5 class="modal-title" id="exampleModalCenterTitle">User Profile
               </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body ">
-        
+
 
               <form action="{{'/users/'.Auth::user()->id,'/update'}}" method="POST">
                {{csrf_field()}}
                  {{method_field('PUT')}}
-        
+
                  <div align="center">
                       <img src="{{Auth::user()->image_path}}" class="rounded mx-auto d-block " alt="..." height="100px" width="100px">
                  </div>
 
                 <div class="col-md-4 offset-md-4 mb-3 text-center">
                    <label for="username"><b>{{Auth::user()->username}}</b></label>
-                  
+
                 </div>
 
                 <div class="form-row">
@@ -128,7 +128,7 @@
                       <label for="age"><b>Age</b></label>
                       <input type="text" class="form-control" id="age" placeholder="Last name" value="{{Auth::user()->age}}" readonly>
                     </div>
-                
+
                     <div class="col-md-12 mb-3">
                       <label for="address"><b>Address</b></label>
                       <input type="text" class="form-control" id="address" placeholder="Address" name="address" value="{{Auth::user()->address}}" readonly>
@@ -149,7 +149,7 @@
                       <input type="text" class="form-control" id="email address" placeholder="Address" name="email_add" value="{{Auth::user()->email_add}}" readonly>
                     </div>
 
-                </div> 
+                </div>
                 <div class="" align="center">
                     <a href="{{url('/user')}}" class="btn btn-primary">
                       Manage Account
@@ -160,7 +160,7 @@
             </div>
           </div>
         </div>
-      </div>       
+      </div>
 
 @yield('contentz')
 

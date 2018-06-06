@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DriverRouteLog;
 use App\Order;
 use App\Personnel;
 use App\User;
@@ -25,7 +26,7 @@ class APIController extends Controller
             ], 422);
         }
 
-        $user = User::whereUsername($request->username)->first();
+        $user = User::select('users.*')->withPersonnelId()->whereUsername($request->username)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
             return response()->json([
@@ -51,6 +52,7 @@ class APIController extends Controller
                 'id' => $order->id,
                 'customer' => $order->customer->fullname,
                 'address' => $order->customer->address,
+                'order_date' => date_create($order->created_by)->format('M d, Y h:i A'),
                 'total_amount' => $order->total,
                 'status' => $order->status,
                 'details' => $order->details->map(function ($item) {
@@ -58,6 +60,7 @@ class APIController extends Controller
                         'item' => $item->product->itemname,
                         'quantity' => $item->quantity,
                         'unit' => $item->product->unit,
+                        'amount' => $item->quantity * $item->unit_price,
                     ];
                 }),
             ];
@@ -83,7 +86,32 @@ class APIController extends Controller
             ]);
         }
 
-        Order::whereId($input['id'])->set($input['status']);
+        Order::whereId($request->id)->set($request->status);
+
+        return response()->json([
+            'result' => true,
+        ]);
+    }
+
+    public function saveCoords(Request $request)
+    {
+        $rules = [
+            'order_id' => 'required',
+            'personnel_id' => 'required',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'result' => false,
+                'errors' => $validator->errors()->all(),
+            ]);
+        }
+
+        DriverRouteLog::create($request->only(array_keys($rules)));
 
         return response()->json([
             'result' => true,

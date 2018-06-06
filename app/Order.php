@@ -58,8 +58,8 @@ class Order extends Model
 
     public function scopeUndelivered($query, $deliveryPersonnelId = false)
     {
-        return $query->latest()
-            ->where('status', '!=', 'received')
+        return $query->whereNotIn('status', ['received', 'pending'])
+            ->orderBy('id', 'asc')
             ->when($deliveryPersonnelId, function ($q) use ($deliveryPersonnelId) {
                 $q->whereDeliveredBy($deliveryPersonnelId);
             });

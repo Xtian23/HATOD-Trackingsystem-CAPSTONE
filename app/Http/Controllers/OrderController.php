@@ -44,7 +44,7 @@ class OrderController extends Controller
              })->orderBy('itemname','asc')->paginate(10);;
 
 
-        return view('orders.addOrder',[
+        return view('orders.addorder',[
             'AllCustomers'=>$AllCustomers,'products'=>$AllProducts,'AllPersonnels'=>$AllPersonnels
         ]);
     }

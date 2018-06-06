@@ -146,7 +146,7 @@ class ProductController extends Controller
                 ->withInput($request->all())
                 ->withErrors($e->validator);
         }
-
+        
         $newProduct = Product::find($id);
         // $newProduct->itemimage=$request->itemimage;
         $newProduct->title=Input::get('item_description');

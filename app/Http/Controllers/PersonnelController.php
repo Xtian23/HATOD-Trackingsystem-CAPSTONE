@@ -54,7 +54,7 @@ class PersonnelController extends Controller
             //validation for input Customer
             $this->validate($request, [
                 "usertype" => "required",
-                "username" => "required",
+                "username" => "required|unique:users",
                 "password" => "required",
                 "personnel_fname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
                 "personnel_lname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
@@ -133,7 +133,7 @@ class PersonnelController extends Controller
             //validation for input Customer
             $this->validate($request, [
                 "usertype" => "required",
-                "username" => "nullable",
+                "username" => "nullable|unique:users",
                 "password" => "nullable",
                 "personnel_fname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
                 "personnel_lname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
@@ -150,15 +150,6 @@ class PersonnelController extends Controller
                 ->withErrors($e->validator);
         }
 
-        // $newUser = User::find($id);
-        // $newUser->usertype=$request->usertype;
-        // $newUser->username=$request->username;
-        // $newUser->fname=$request->personnel_fname;
-        // $newUser->lname=$request->personnel_lname;
-        // $newUser->address=$request->address;
-        // $newUser->birthdate=$request->birthdate;
-        // $newUser->contact_no=$request->contact_no;
-        // $newUser->password=bcrypt($request->password);
         $newPersonnel = Personnel::find($id);
         $newPersonnel->personnel_fname = $request->personnel_fname;
         $newPersonnel->personnel_lname = $request->personnel_lname;

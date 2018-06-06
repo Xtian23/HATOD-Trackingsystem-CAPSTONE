@@ -22,14 +22,12 @@
         <thead>
           <tr>
             <th>Driver</th>
-            <th>Legend</th>
           </tr>
         </thead>
         <tbody>
           @foreach($drivers as $row)
             <tr  data-id="{{ $row->id }}" data->
               <td>{{ $row->fullname }}</td>
-              <td>{{ $row->color }}</td>
             </tr>
           @endforeach
         </tbody>
@@ -48,7 +46,8 @@
   var map,
       poly,
       lastId = 0,
-      drivers = {};
+      drivers = {},
+      names = {!! $drivers->pluck('fullname', 'id')->toJson() !!};
 
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -63,19 +62,36 @@
     $.getJSON("{{ url('routes/latest') }}")
       .done(function (res) {
         $.each(res['data'], function (i, path) {
+
+          var position = {
+            lat: path['lat'],
+            lng: path['lng']
+          };
+
           var marker = new google.maps.Marker({
-            position: {
-              lat: path['lat'],
-              lng: path['lng']
-            },
-            // label: $('.driver-table').find('tr[data-id='+path['personnel_id']+'] td:first-child').text(),
+            position:position,
             icon: '{{ asset("truck-marker.png") }}',
+            zIndex: -1,
+            label: names[path['personnel_id']]
           });
+
+          // var infowindow = new google.maps.InfoWindow({
+          //   content: names[path['personnel_id']],
+          //   position: position,
+          //   zIndex: 1,
+          //   pane: 'mapPane'
+          // });
+
           if(drivers.hasOwnProperty(path['personnel_id'])){
-            drivers[path['personnel_id']].setMap(null)
+            drivers[path['personnel_id']]['marker'].setMap(null)
+            // drivers[path['personnel_id']]['infowindow'].close()
           }
-          drivers[path['personnel_id']] = marker;
-          drivers[path['personnel_id']].setMap(map)
+          drivers[path['personnel_id']] = {
+            // 'infowindow': infowindow,
+            'marker': marker
+          }
+          drivers[path['personnel_id']]['marker'].setMap(map)
+          // drivers[path['personnel_id']]['infowindow'].open(map)
         })
       })
       .always(function () {

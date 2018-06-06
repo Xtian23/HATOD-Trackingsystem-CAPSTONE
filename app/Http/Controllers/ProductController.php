@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Http\Request;
+
 use App\Product;
 use App\Unit;
-use Illuminate\validation\Rule;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -17,20 +17,20 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $AllUnits = Unit::orderBy('unit','asc')->get();    
+
+        $AllUnits = Unit::orderBy('unit', 'asc')->get();
         $search = $request->search;
-        $AllProducts=Product::when($search, function ($q)use ($search) {
-                $q->where('itemname', 'like', "%{$search}%")
+        $AllProducts = Product::when($search, function ($q) use ($search) {
+            $q->where('itemname', 'like', "%{$search}%")
                 ->orwhere('item_description', 'like', "%{$search}%")
                 ->orwhere('unit', 'like', "%{$search}%")
                 ->orwhere('unitprice', 'like', "%{$search}%");
         })->orderBy('itemname')->paginate(10);
-      
-            return view('products.index',[
-                        'products'=>$AllProducts,
-                        'AllUnits'=>$AllUnits
-      ]);
+
+        return view('products.index', [
+            'products' => $AllProducts,
+            'AllUnits' => $AllUnits,
+        ]);
 
     }
 
@@ -40,15 +40,14 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
     public function create()
     {
 
         $AllUnits = Unit::all();
-        return view('products.index',[
-                    'AllUnits'=>$AllUnits
+        return view('products.index', [
+            'AllUnits' => $AllUnits,
         ]);
-      
+
     }
 
     /**
@@ -61,16 +60,15 @@ class ProductController extends Controller
     {
         try {
             //validation for input products
-            $this->validate($request,[
-            "itemimage"=>"required|image",
-            "itemname"=>"required|string|unique:products",
-            "item_description"=>"required|string|max:150",
-            "unitprice"=>"required",
-            "unit"=>"required"
-             ]);
+            $this->validate($request, [
+                "itemimage" => "required|image",
+                "itemname" => "required|string|unique:products",
+                "item_description" => "required|string|max:150",
+                "unitprice" => "required",
+                "unit" => "required",
+            ]);
 
-
-           }catch(\Illuminate\Validation\ValidationException $e){
+        } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->route('products.index')
                 ->with('open-create-modal', true)
                 ->withInput($request->all())
@@ -78,19 +76,18 @@ class ProductController extends Controller
         }
 
         $newProduct = new Product;
-        $newProduct->title=Input::get('item_description');
+        $newProduct->title = Input::get('item_description');
         $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
 
         $newProduct->name = '  ';
 
-
-        $newProduct->itemname=$request->itemname;
-        $newProduct->unit=$request->unit;
-        $newProduct->unitprice=$request->unitprice;
-        $newProduct->item_description=$request->item_description;
+        $newProduct->itemname = $request->itemname;
+        $newProduct->unit = $request->unit;
+        $newProduct->unitprice = $request->unitprice;
+        $newProduct->item_description = $request->item_description;
 
         $newProduct->save();
-        session()->flash('notif',$newProduct->itemname.' has been added successfully.');
+        session()->flash('notif', $newProduct->itemname . ' has been added successfully.');
         return redirect()->route('products.index');
 
     }
@@ -104,7 +101,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $item = Product::find($id);
-        return view('products.edit',compact('product'));
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -115,8 +112,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-         $product = Product::find($id);
-         return view('products.edit',compact('product'));
+        $product = Product::find($id);
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -129,44 +126,44 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         try {
-        //validation for input products
-            $this->validate($request,[
-            "itemimage"=>"image",
-            "itemname"=> ['required', 'string', Rule::unique('products')->where(function ($q) use ($id){
-                return $q->where('id', '!=', $id)->whereNull('deleted_at');
-            })],
-            "item_description"=>"required|string|max:150",
-            "unitprice"=>"required",
-            "unit"=>"required"
-             ]);
+            //validation for input products
+            $this->validate($request, [
+                "itemimage" => "image",
+                "itemname" => ['required', 'string', Rule::unique('products')->where(function ($q) use ($id) {
+                    return $q->where('id', '!=', $id)->whereNull('deleted_at');
+                })],
+                "item_description" => "required|string|max:150",
+                "unitprice" => "required",
+                "unit" => "required",
+            ]);
 
-            }catch(\Illuminate\Validation\ValidationException $e){
+        } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->route('products.index')
                 ->with('open-update-modal', $id)
                 ->withInput($request->all())
                 ->withErrors($e->validator);
         }
-        
+
         $newProduct = Product::find($id);
         // $newProduct->itemimage=$request->itemimage;
-        $newProduct->title=Input::get('item_description');
+        $newProduct->title = Input::get('item_description');
 
-        if($request->hasFile('itemimage')){
+        if ($request->hasFile('itemimage')) {
             $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
         }
         $newProduct->name = '  ';
-  
-        $newProduct->itemname=$request->itemname;
-        $newProduct->unit=$request->unit;
-        $newProduct->unitprice=$request->unitprice;
-        $newProduct->item_description=$request->item_description;
+
+        $newProduct->itemname = $request->itemname;
+        $newProduct->unit = $request->unit;
+        $newProduct->unitprice = $request->unitprice;
+        $newProduct->item_description = $request->item_description;
 
         $newProduct->save();
-        session()->flash('update',$newProduct->itemname.' has been updated successfully.');
+        session()->flash('update', $newProduct->itemname . ' has been updated successfully.');
         return redirect()->route('products.index');
     }
 
-    /** 
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -176,9 +173,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        session()->flash('delete',$product->itemname.' has been deleted successfully.');
+        session()->flash('delete', $product->itemname . ' has been deleted successfully.');
 
         return redirect()->route('products.index');
-       
+
     }
 }

@@ -63,8 +63,12 @@ Route::post('/register', 'UserController@register');
 
 Route::resource('/user', 'UserController')->middleware('auth');
 
+Route::get('routes', 'DriverRouteController');
+Route::get('routes/latest', 'DriverRouteController@getLatestPositions');
+
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
     Route::post('login', 'APIController@authenticate');
     Route::get('driver/{userId}/orders', 'APIController@getAssignedOrders');
     Route::post('order', 'APIController@setOrderStatus');
+    Route::post('save-coords', 'APIController@saveCoords');
 });

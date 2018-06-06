@@ -42,4 +42,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Personnel::class, 'user_id');
     }
+
+    public function scopeWithPersonnelId($query)
+    {
+        return $query->addSelect('p.id AS personnel_id')
+            ->join('personnels AS p', 'p.user_id', '=', 'users.id');
+    }
 }

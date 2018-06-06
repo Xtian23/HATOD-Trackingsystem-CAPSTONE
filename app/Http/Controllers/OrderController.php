@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        $AllOrders=Order::with(['details', 'deliveryPersonnel', 'clerk'])->orderBy('order_date')->paginate(10);
+        $AllOrders=Order::with(['details', 'deliveryPersonnel', 'clerk'])->orderBy('order_date','desc')->paginate(10);
 
       
         return view('orders.index',[
@@ -40,9 +40,8 @@ class OrderController extends Controller
 
         $search = $request->search;
         $AllProducts = Product::when($search, function ($q)use ($search) {
-            $q->where('itemname', 'like', "%{$search}%");
+             $q->where('itemname', 'like', "%{$search}%");
              })->orderBy('itemname','asc')->paginate(10);;
-
 
         return view('orders.addorder',[
             'AllCustomers'=>$AllCustomers,'products'=>$AllProducts,'AllPersonnels'=>$AllPersonnels

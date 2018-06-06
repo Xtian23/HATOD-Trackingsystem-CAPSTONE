@@ -83,9 +83,9 @@
   
      </div>
      </form>
-<!-- 
 
-        {!! Form::open(['method'=>'GET','url' => route('orders.index'),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+
+        {!! Form::open(['method'=>'GET','url' => route('clerkorders.edit',['id' => $orders->id]),'class'=>'navbar-form navbar-left','role'=>'search'])  !!}
             <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
                 <input type="text" class="form-control" name="search"  placeholder="Search...">
                 <span class="input-group-btn">
@@ -94,7 +94,7 @@
                     </button>
                 </span>
             </div>
-            {!! Form::close() !!} -->
+            {!! Form::close() !!}
 
      <!-- Codes for table- -->
 
@@ -162,7 +162,7 @@
         <tr>
            <td align="center">
               {!! Form::checkbox("details[{$loop->index}][product_id]", $product->id, false , ['class' => 'form-check-input product prc product-has-no-val']) !!}
-              <img src="{{asset($product->name)}}" width="50px" height="50px">
+              <img src="{{asset($product->image_path)}}" width="50px" height="50px">
             </td>
            
               <td>

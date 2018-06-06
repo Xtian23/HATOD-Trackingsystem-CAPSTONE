@@ -20,26 +20,26 @@
   <table class="table bg-white table-hover text-center">
 
 <!-- STARTcode for notification STORE / DELETE /UPDATE -->
-      @if(session()->has('notif'))
-        <div class="alert alert-success text-center">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          {{session()->get('notif')}}
-        </div>
-      @endif
+          @if(session()->has('notif'))
+            <div class="alert alert-success text-center">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              {{session()->get('notif')}}
+            </div>
+          @endif
 
-      @if(session()->has('delete'))
-        <div class="alert alert-danger text-center">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{session()->get('delete')}}
-        </div>
-      @endif
+          @if(session()->has('delete'))
+            <div class="alert alert-danger text-center">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{session()->get('delete')}}
+            </div>
+          @endif
 
-      @if(session()->has('update'))
-        <div class="alert alert-success text-center">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-           {{session()->get('update')}}
-        </div>
-      @endif
+          @if(session()->has('update'))
+            <div class="alert alert-success text-center">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+               {{session()->get('update')}}
+            </div>
+          @endif
 <!-- EndCode for notification STORE / DELETE /UPDATE -->
 
   <div class="text-left">

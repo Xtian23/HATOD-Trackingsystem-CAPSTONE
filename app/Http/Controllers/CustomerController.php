@@ -56,8 +56,8 @@ class CustomerController extends Controller
         try {
             //validation for input customer
             $this->validate($request,[
-                "customer_fname"=>"required|string|alpha",
-                "customer_lname"=>"required|string|alpha",
+                "customer_fname"=>"required|string|regex:/^[a-zA-Z\s]+$/",
+                "customer_lname"=>"required|string|regex:/^[a-zA-Z\s]+$/",
                 "address"=>"required|string",
                 "birthdate"=>"required|date|before:-1 year",
                 "contact_no"=>"required|numeric|digits:11",
@@ -83,9 +83,6 @@ class CustomerController extends Controller
         $newCustomer->email_add=$request->email_add;
 
         $newCustomer->save(); //saves all the data(s) besing filled from form
-
-        // Customer::create($request->AllCustomers  ());
-
         session()->flash('notif',$newCustomer->customer_fname.' '. $newCustomer->customer_lname.' has been added successfully.'); //displaying notification for success storing into the database
         return redirect()->route('customers.index'); //after storing to the databse  ,will be redirected to the customer list
     }
@@ -126,8 +123,8 @@ class CustomerController extends Controller
         try {
             //validation for input customer
             $this->validate($request,[
-                   "customer_fname"=>"required|string|alpha",
-                "customer_lname"=>"required|string|alpha",
+                "customer_fname"=>"required|string|regex:/^[a-zA-Z\s]+$/",
+                "customer_lname"=>"required|string|regex:/^[a-zA-Z\s]+$/",
                 "address"=>"required|string",
                 "birthdate"=>"required|date|before:-1 year",
                 "contact_no"=>"required|numeric|digits:11",

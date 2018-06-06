@@ -25,7 +25,7 @@ class ProductController extends Controller
                 ->orwhere('item_description', 'like', "%{$search}%")
                 ->orwhere('unit', 'like', "%{$search}%")
                 ->orwhere('unitprice', 'like', "%{$search}%");
-        })->orderBy('itemname')->paginate(10);
+            })->orderBy('itemname')->paginate(10);
 
         return view('products.index', [
             'products' => $AllProducts,
@@ -78,9 +78,7 @@ class ProductController extends Controller
         $newProduct = new Product;
         $newProduct->title = Input::get('item_description');
         $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
-
         $newProduct->name = '  ';
-
         $newProduct->itemname = $request->itemname;
         $newProduct->unit = $request->unit;
         $newProduct->unitprice = $request->unitprice;
@@ -145,19 +143,15 @@ class ProductController extends Controller
         }
 
         $newProduct = Product::find($id);
-        // $newProduct->itemimage=$request->itemimage;
         $newProduct->title = Input::get('item_description');
-
-        if ($request->hasFile('itemimage')) {
-            $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
-        }
+            if ($request->hasFile('itemimage')) {
+                $newProduct->itemimage = $request->file('itemimage')->store('item-images', 'public');
+            }
         $newProduct->name = '  ';
-
         $newProduct->itemname = $request->itemname;
         $newProduct->unit = $request->unit;
         $newProduct->unitprice = $request->unitprice;
         $newProduct->item_description = $request->item_description;
-
         $newProduct->save();
         session()->flash('update', $newProduct->itemname . ' has been updated successfully.');
         return redirect()->route('products.index');
@@ -174,8 +168,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         session()->flash('delete', $product->itemname . ' has been deleted successfully.');
-
         return redirect()->route('products.index');
-
     }
 }

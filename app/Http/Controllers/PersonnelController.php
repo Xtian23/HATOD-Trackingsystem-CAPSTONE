@@ -56,12 +56,13 @@ class PersonnelController extends Controller
                 "usertype" => "required",
                 "username" => "required|unique:users",
                 "password" => "required",
-                "personnel_fname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
-                "personnel_lname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
+                "personnel_fname" => "required|regex:/^[a-zA-Z\s]+$/",
+                "personnel_lname" => "required|regex:/^[a-zA-Z\s]+$/",
                 "address" => "required|string",
                 "birthdate" => "required|before:-1 year",
                 "contact_no" => "required|numeric|digits:11",
                 "personneltype" => "required",
+         
             ]);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -88,7 +89,6 @@ class PersonnelController extends Controller
         $newPersonnel->birthdate = $request->birthdate;
         $newPersonnel->contact_no = $request->contact_no;
         $newPersonnel->personneltype = $request->personneltype;
-        $newPersonnel->color = $request->color;
         $newPersonnel->user_id = $newUser->id;
         $newPersonnel->save(); //saving all the data filled from input form into the databases
 
@@ -133,14 +133,15 @@ class PersonnelController extends Controller
             //validation for input Customer
             $this->validate($request, [
                 "usertype" => "required",
-                "username" => "nullable|unique:users",
+                "username" => "nullable",
                 "password" => "nullable",
-                "personnel_fname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
-                "personnel_lname" => "required|regex:/^[a-zA-Z0-9\s]+$/",
+                "personnel_fname" => "required|regex:/^[a-zA-Z\s]+$/",
+                "personnel_lname" => "required|regex:/^[a-zA-Z\s]+$/",
                 "address" => "required|string",
                 "birthdate" => "required|before:-18 year",
                 "contact_no" => "required|numeric|digits:11",
                 "personneltype" => "required",
+
             ]);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -157,7 +158,7 @@ class PersonnelController extends Controller
         $newPersonnel->birthdate = $request->birthdate;
         $newPersonnel->contact_no = $request->contact_no;
         $newPersonnel->personneltype = $request->personneltype;
-        $newPersonnel->color = $request->color;
+
 
         // $newUser->save();
         $newPersonnel->save();

@@ -90,11 +90,13 @@
                   <div class="form-group">
                       <label >Address</label>
                       <input type="text" class="form-control"  placeholder="Enter Address ..." name="address" required="true">
+
                          <div class="text-danger">
                               @if($errors->has("address"))
                              {{$errors->first("address")}}
                              @endif 
                          </div>
+
                   </div>
 
                   <div class="form-group">  
@@ -134,9 +136,7 @@
 
                </div>
 
-                         
-                          <label>Color</label>
-                           <input type="color"  name="color" class="form-control" />
+                       
                    
                 <div class="row mt-3">
                   <div class="col-md-12">
@@ -353,9 +353,6 @@
                                           </div>
                                   </div>
 
-
-                                         <label>Color</label>
-                                           <input type="color"  name="color" class="form-control" />
 
                                     <div class="row mt-3">
                                       <div class="col-md-12">

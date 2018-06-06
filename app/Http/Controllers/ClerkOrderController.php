@@ -18,7 +18,7 @@ class ClerkOrderController extends Controller
      */
     public function index()
     {
-        $AllOrders=Order::with(['details', 'deliveryPersonnel', 'clerk'])->orderBy('order_date')->paginate(10);
+        $AllOrders=Order::with(['details', 'deliveryPersonnel', 'clerk'])->orderBy('order_date','desc')->paginate(10);
 
         return view('clerkorders.index',[
             'orders'=>$AllOrders
@@ -33,13 +33,14 @@ class ClerkOrderController extends Controller
     public function create(Request $request)
     {
         $AllCustomers = Customer::all();
+        $AllProducts = Product::all();
         $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
         $search = $request->search;
         $AllProducts = Product::when($search, function ($q)use ($search) {
             $q->where('itemname', 'like', "%{$search}%");
              })->orderBy('itemname','asc')->paginate(10);;
 
-        return view('clerkorders.addOrder',[
+        return view('clerkorders.addorder',[
             'AllCustomers'=>$AllCustomers,'products'=>$AllProducts,'AllPersonnels'=>$AllPersonnels
         ]);
     }
@@ -97,7 +98,7 @@ class ClerkOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         
         $orders = Order::with(['details.product', 'customer', 'deliveryPersonnel'])->whereId($id)->first();
@@ -106,6 +107,13 @@ class ClerkOrderController extends Controller
         $AllCustomers = Customer::all();
         $AllProducts = Product::all();
         $AllPersonnels = Personnel::where('personneltype', '=', "delivery")->get();
+
+
+        $search = $request->search;
+        $AllProducts = Product::when($search, function ($q)use ($search) {
+            $q->where('itemname', 'like', "%{$search}%");
+             })->orderBy('itemname','asc')->paginate(10);;
+
 
 
         return view('clerkorders.edit', [
@@ -172,6 +180,12 @@ class ClerkOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $orderline = OrderLine::find($id);
+        $order->delete(); 
+        $orderline->delete();
+        //deletion of the selected id
+        // session()->flash('delete',$customer->customer_fname.' '. $customer->customer_lname.' has been deleted Successfully.');//displaying notification for success deletion into the database
+        return redirect()->route('clerkorders.index');
     }
 }

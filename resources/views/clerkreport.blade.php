@@ -94,9 +94,98 @@
         <td>{{ $row->deliveryPersonnel->fullname }}</td>
         <td>{{ $row->status}}</td>
         <td class="text-right">{{ number_format($row->total, 2) }}</td>
-        <td class="no-print">    <!-- Button trigger modal -->
-          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalLong"><img src="/view.png" width="20px"> View</button>
-        </td>
+           <td>    <!-- Button trigger modal -->
+          <button class="btn btn-primary btn-sm no-print" data-toggle="modal" data-target="#exampleModalLong-{{$row->id}}"><img src="/view.png" width="20px"> View</button>
+                <!-- Modal -->
+                              <div class="modal fade" id="exampleModalLong-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                      <div class="">
+                                        <b>Order ID:</b>
+                                          {{ $row->id }}
+                                      </div>
+                                      <div class="">
+                                        <b>Customer Name:</b>
+                                        {{ $row->customer->fullname}}
+                                      </div>
+                                      <div class="">
+                                        <b>Address:</b>
+                                        {{ $row->customer->address }}
+                                      </div>
+                                      <div class="">
+                                          <b>Date Ordered:</b>
+                                          {{ date_create($row->created_at)->format('M d, Y h:i a') }}
+                                      </div>
+                                       <div class="">
+                                        <b>Assigned-Clerk:</b>
+                                        {{ $row->clerk->fullname }}
+                                      </div>
+                                        <div class="">
+                                        <b>Date/Time Delivered:</b>
+                               
+                                      </div>
+                                       <div class="">
+                                        <b>Delivered By:</b>
+                                        {{ $row->deliveryPersonnel->fullname }}
+                                      </div>
+
+                                        <table class="table">
+                                          <thead>
+                                            <tr>
+                                              <th colspan="3" class="text-center">Ordered Item(s):</th>
+                                            </tr>
+                                            <tr>
+                                              <th>Product Name</th>
+                                              <th>Quantity</th>
+                                              <th>Unit Price</th>
+                                              <th>Subtotal</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            @foreach($row->details as $order)
+                                              <tr>
+                                                <td>
+                                                  {{$order->product->itemname}}
+                                                </td>
+                                                <td>
+                                                  {{$order->quantity}}
+                                                </td>
+                                                <td>
+                                                  {{$order->product->unitprice}}
+                                                </td>
+                                                <td>
+                                                  <div class="form-group">
+                                                    {{ number_format(($order->quantity * $order->product->unitprice), 2) }}
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            @endforeach
+                                          </tbody>
+                                        </table>
+
+
+
+                                           <div class="text-right">
+                                            <b>Total:</b>
+                                            {{ number_format($row->total, 2) }} 
+                                          </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Go Back</button>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+        </td>   
        
           
       </tr>

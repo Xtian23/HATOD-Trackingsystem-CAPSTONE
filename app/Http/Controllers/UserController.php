@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 
+
 class UserController extends Controller
 {
    public function register(Request $request)
    {  
-   		// return $request->username.$request->fname.$request->lname;
+
    		$this->validate($request,[
         "userimage"=>"image",
    			"username"=>"required|string|unique:users",
-   			"fname"=>"required|string|alpha",
-   			"lname"=>"required|string|alpha",
+   			"fname"=>"required|regex:/^[a-zA-Z\s]+$/",
+   			"lname"=>"required|regex:/^[a-zA-Z\s]+$/",
    			"birthdate"=>"required|before:-1 year|date",
    			"password"=>"required|min:4|same:password_confirmation",
    			"password_confirmation"=>"same:password"
@@ -23,13 +24,9 @@ class UserController extends Controller
    		]);
 
    		$user= new User;
-
         
         $user->title=Input::get('username');
         $user->userimage = $request->file('userimage')->store('user-images', 'public');
-
-       
-
    		$user->username=$request->username;
    		$user->fname=$request->fname;
    		$user->lname=$request->lname;
@@ -40,7 +37,7 @@ class UserController extends Controller
       $user->contact_no=$request->contact_no;
       $user->usertype=$request->usertype;
       $user->save();
-      session()->flash('notif',' Registered Successfully!, Please Login');
+      session()->flash('notif',$user->fname . ' ' . $user->lname . ' Registered Successfully!, Please Login');
 
 
 
@@ -88,7 +85,6 @@ class UserController extends Controller
 
   }
 
-
    public function index()  
    {
          return view('accountsetting');
@@ -109,23 +105,19 @@ class UserController extends Controller
         $this->validate($request,[
         "userimage"=>"image",
         "username"=>"required|string",
-        "fname"=>"required|string|alpha",
-        "lname"=>"required|string|alpha",
+        "fname"=>"required|regex:/^[a-zA-Z\s]+$/",
+        "lname"=>"required|regex:/^[a-zA-Z\s]+$/",
         "birthdate"=>"required|before:-1 year|date",
         "password"=>"nullable|min:4|same:password_confirmation",
         "password_confirmation"=>"nullable|same:password"
 
       ]);
         $user =  User::find($id);
-      
-        $user->userimage=$request->userimage;
         $user->title=Input::get('username');
 
         if($request->hasFile('userimage')){
             $user->userimage = $request->file('userimage')->store('user-images', 'public');
         }
-
-
 
         $user->username=$request->username;
         $user->fname=$request->fname;
@@ -136,24 +128,16 @@ class UserController extends Controller
         if(trim($request->password)){
           $user->password=bcrypt($request->password);
         }
-        
         $user->address=$request->address;
         $user->email_add=$request->email_add;
         $user->contact_no=$request->contact_no;
         $user->usertype=$request->usertype;
         $user->save();
 
+          session()->flash('update',$user->fname . ' ' . $user->lname . ' has been updated successfully.');
         return redirect('/user');
     }
 
-    //   public function destroy($id)
-    // {
-    //     $unit=Unit::find($id);
-    //     $unit->delete();
-
-    //     return redirect('products.index');
-
-    // }
 
 
 }

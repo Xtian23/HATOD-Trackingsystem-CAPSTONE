@@ -96,7 +96,7 @@
         <td>{{ $row->status}}</td>
         <td class="text-right">{{ number_format($row->total, 2) }}</td>
            <td>    <!-- Button trigger modal -->
-          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalLong-{{$row->id}}"><img src="/view.png" width="20px"> View</button>
+          <button class="btn btn-primary btn-sm no-print" data-toggle="modal" data-target="#exampleModalLong-{{$row->id}}"><img src="/view.png" width="20px"> View</button>
                 <!-- Modal -->
                               <div class="modal fade" id="exampleModalLong-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                 <div class="modal-dialog" role="document">

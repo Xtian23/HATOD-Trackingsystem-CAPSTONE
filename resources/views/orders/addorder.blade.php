@@ -85,7 +85,7 @@
 
      <!-- contact -->
        <div class="form-group col-md-4">
-          <label >Email Address (Optional)</label>
+          <label >Email Address</label>
           <input type="text" class="form-control text-center" name="email_add" id="email-add" disabled="true" data-emails="{{htmlspecialchars(json_encode($AllCustomers->pluck('email_add','id')))}}">
                                 <div class="text-danger">
                                        @if($errors->has("email_add"))

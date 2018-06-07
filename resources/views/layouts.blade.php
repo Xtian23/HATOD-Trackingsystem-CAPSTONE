@@ -49,7 +49,7 @@
             </li>
 
               <li class="nav-item active">
-                <a class="nav-link" href="https://liteonebiz.tech/kaindoy/hatudlocation.html">Track</a>
+                <a class="nav-link" href="{{ url('routes') }}">Track</a>
               </li>
 
 

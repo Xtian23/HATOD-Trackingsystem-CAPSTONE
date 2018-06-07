@@ -21,6 +21,7 @@ class Order extends Model
         'served_by',
         'delivered_by',
         'status',
+        'datetime_received',
     ];
 
     protected $dates = [
@@ -72,7 +73,7 @@ class Order extends Model
             });
     }
 
-    public function scopeSet($query, $orderStatus)
+    public function set($orderStatus)
     {
         $columns = [
             'status' => $orderStatus,
@@ -86,7 +87,7 @@ class Order extends Model
             $this->notifyCustomer('DELIVERED');
         }
 
-        return $query->update($columns);
+        return $this->update($columns);
     }
 
 }

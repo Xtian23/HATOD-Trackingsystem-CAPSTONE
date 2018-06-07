@@ -111,9 +111,7 @@
                {{csrf_field()}}
                  {{method_field('PUT')}}
         
-                 <div align="center">
-                      <img src="/avatar.png" class="rounded mx-auto d-block " alt="..." height="100px" width="100px">
-                 </div>
+                
 
                 <div class="col-md-4 offset-md-4 mb-3 text-center">
                    <label for="username"><b>{{Auth::user()->username}}</b></label>

@@ -129,8 +129,8 @@
                                         {{ $row->clerk->fullname }}
                                       </div>
                                         <div class="">
-                                        <b>Date/Time Delivered:</b>
-                               
+                                        <b>Date/Time Received:</b>
+                                        {{ $row->datetime_received ? $row->datetime_received->format('M d, Y h:i a') : null }}
                                       </div>
                                        <div class="">
                                         <b>Delivered By:</b>

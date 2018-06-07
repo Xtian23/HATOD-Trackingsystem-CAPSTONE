@@ -6,7 +6,7 @@
 <div>
 
 <div class="col-md-10 offset-md-1 bg-light  form-control border-primary " >
- 
+
   <div class="class text-center">
     <h1>ORDER FORM</h1>
 
@@ -44,7 +44,7 @@
       <label>Status</label>
       {!! Form::select('status', ['' => 'Status ...', 'pending' => 'pending', 'processed' => 'processed', 'delivered' => 'delivered', 'receieved' => 'receieved'],$orders->status,['class' => 'form-control'])!!}
     </div>
-   
+
     <!-- DateofDelivery -->
      </div>
      <div class="mt-4 mb-4">
@@ -80,17 +80,12 @@
     </div>
 
 
-  
+
      </div>
      </form>
- 
+
    {!! Form::open(['method'=>'GET','url' => route('orders.edit',['id' => $orders->id]),'class'=>'navbar-form navbar-left','role'=>'search'])  !!} <div class="input-group custom-search-form col-md-4 offset-md-8 mb-3">
-                <input type="text" class="form-control" name="search"  placeholder="Search...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary ml" type="submit">
-                     Search
-                    </button>
-                </span>
+                <input type="text" class="form-control search-product" name="search"  placeholder="Search...">
             </div>
             {!! Form::close() !!}
 
@@ -107,30 +102,30 @@
       <th>Unit Price</th>
       <th class="text-center">Quantity</th>
       <th class="text-center">Sub-Total</th>
-      
+
     </tr>
   </thead>
 
 <tbody id="transaction" data-orders="{{ htmlspecialchars($orders->details) }}">
     @foreach($orders->details as $order)
       <tr>
-       
+
 
           <td align="center">
             {!! Form::checkbox("details[{$loop->index}][product_id]", $order->product_id, $order->id, ['class' => 'form-check-input product prc product-has-val']) !!}
                   <img src="{{asset($order->product->image_path)}}" width="50px" height="50px">
-            
+
           </td>
             <td>
-                  <div class="form-group">
-              
+                  <div class="form-group item-name">
+
              {{$order->product->itemname}}
                 </div>
             </td>
 
             <td>
                   <div class="form-group">
-           
+
                {{$order->product->item_description}}
                   </div>
             </td>
@@ -162,9 +157,9 @@
               {!! Form::checkbox("details[{$loop->index}][product_id]", $product->id, false , ['class' => 'form-check-input product prc product-has-no-val']) !!}
               <img src="{{asset($product->image_path)}}" width="50px" height="50px">
             </td>
-           
+
               <td>
-                <div class="form-group">
+                <div class="form-group itemname">
                   {{$product->itemname}}
                 </div>
               </td>
@@ -175,7 +170,7 @@
                 </div>
               </td>
 
-              <td> 
+              <td>
                 {{$product->unit}}
               </td>
 
@@ -200,30 +195,30 @@
       @endforeach
 
 
-    
+
   </tbody>
 </table>
-    
+
 <div class="form-group col-md-4 float-right">
   <label ><b>Total Amount</b></label>
   <input type="text" class="form-control grandtotal" id="net" name="total" placeholder="Total Amount" value="" readonly="true">
 </div>
 
 </div>
-  
+
 
         <!-- total amount -->
-           
-            
+
+
             <!--end-->
                <div class="form-group col-md-4">
                 <label for="exampleFormControlSelect1"><b>Served by:</b></label>
                 <input type="text" disabled class="form-control" value="{{Auth::user()->fname}}">
 
                 <input type="hidden" class="form-control" name="served_by" value="{{Auth::user()->id}}">
-            </div>  
+            </div>
 
-               
+
 
 
             <!--served by-->
@@ -233,13 +228,13 @@
             </div>
 
 
-          
-                   
-   
+
+
+
  <div class="text-right mt-3">
 
  <a href="{{route('orders.index')}}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
-    
+
         <button type="submit" class="btn btn-primary  text-center" >Submit</button>
  </div>
 
@@ -253,6 +248,23 @@
 @push('js')
 <script type="text/javascript">
   $(document).ready(function(){
+    $('.search-product').keyup(function () {
+      var q = $(this).val().toLowerCase();
+      console.log(q)
+      if(!q){
+        $('#transaction tr:not(.ignore)').removeClass('d-none')
+        return;
+      }
+      $('#transaction tr:not(.ignore)').each(function () {
+        $(this).addClass('d-none')
+        var itemname = $.trim($(this).find('.item-name').text())
+          trimmed = itemname.replace(/\s/g, '').toLowerCase();
+        console.log('%s %s %i', trimmed, q, trimmed.indexOf(q));
+          if(trimmed.indexOf(q) !== -1){
+            $(this).removeClass('d-none')
+          }
+      })
+    })
     $('#customer-name').each(function(){
       if($(this).val()){
         var contactnumbers = $('#contact-number').data('contacts')
@@ -268,7 +280,7 @@
   })
     $(document).ready(function(){
     $('#personnel-name').change(function(){
-   
+
     })
   })
 
@@ -278,7 +290,7 @@
       var net = 0
       $('#transaction tr').each(function () {
         var itemIsChecked = $(this).find('.product').prop('checked');
-          
+
         if(itemIsChecked){
           var unitprice = parseFloat($(this).find('.unit-price').val() || 0),
             quantity = parseFloat($(this).find('.quantity').val() || 0),
@@ -286,7 +298,7 @@
 
           $(this).find('.total').val(total.toFixed(2))
           net+=total;
-          // net = net + total  
+          // net = net + total
 
         }else{
           $(this).find('.total').val(0)
@@ -298,7 +310,7 @@
       })
     });
 
-    $('.prc').trigger('change'); 
+    $('.prc').trigger('change');
 
     $('.product').change(function (argument) {
       if($(this).prop('checked')){
@@ -319,7 +331,7 @@
       var order = $('table tbody').data('orders');
 
       $.each(order, function(key, item){
-         $('.product-has-no-val[value="'+item.product_id+'"]').closest('tr').addClass('d-none')
+         $('.product-has-no-val[value="'+item.product_id+'"]').closest('tr').addClass('d-none ignore')
        })
     })
 

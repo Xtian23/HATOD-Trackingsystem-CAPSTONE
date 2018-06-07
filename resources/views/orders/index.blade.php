@@ -31,7 +31,7 @@
     <a href="{{route('orders.create') }}"  class="btn btn-primary  " role="button" aria-pressed="true">Add Order</a>
 
 
-    
+
   <div class="text-center">
       <h3>ORDERS LIST</h3>
   </div>
@@ -77,13 +77,10 @@
         <td>{{ $row->status}}</td>
         <td class="text-center">{{ number_format($row->total, 2) }}</td>
           <td width="15%">
-               <form action="" method="post">
-                      <a href="{{ route('orders.edit', $row->id) }}" class="btn btn-primary btn-sm"><img src="/edit.png" height="15px"> Edit</a>
-
-                      {{csrf_field()}}
-                      {{method_field('delete')}}
-                      <button type="submit" class="btn btn-danger btn-sm"  name="submit" onclick="return confirm('Are you sure you want to delete this Order?')"><img src="/delete.png" height="16px">Delete</button>
-                 </form>
+              {!! Form::open(['url' => route('orders.destroy', $row->id), 'method' => 'DELETE', 'onclick' => "javascript:confirm('Are you sure?')" ]) !!}
+                <button type="submit" class="btn btn-sm btn-danger"><img src="/delete.png" height="16px">Delete</button>
+              {!! Form::close() !!}
+                <a href="{{ route('orders.edit', $row->id) }}" class="btn btn-primary btn-sm"><img src="/edit.png" height="15px"> Edit</a>
           </td>
       </tr>
     @endforeach
@@ -91,7 +88,7 @@
     <div class="hypebeast">
       {{$orders->links()}}
     </div>
-     
+
   </tbody>
 </table>
 </div>

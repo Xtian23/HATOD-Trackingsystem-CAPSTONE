@@ -86,7 +86,9 @@ class APIController extends Controller
             ]);
         }
 
-        Order::whereId($request->id)->set($request->status);
+        if (Order::whereId($request->id)->set($request->status)) {
+
+        };
 
         return response()->json([
             'result' => true,

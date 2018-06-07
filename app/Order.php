@@ -23,6 +23,10 @@ class Order extends Model
         'status',
     ];
 
+    protected $dates = [
+        'datetime_received',
+    ];
+
     protected $appends = [
         'total',
     ];
@@ -52,9 +56,9 @@ class Order extends Model
         return $this->details->sum('subtotal');
     }
 
-    public function notifyCustomer()
+    public function notifyCustomer($orderStatus = 'PROCESSED')
     {
-        $message = new SMS($this->customer->contact_no, "Good Day Maam/Sir, Your order is now being Processed.H.A.T.O.D. Tracking System
+        $message = new SMS($this->customer->contact_no, "Good Day Maam/Sir, Your order is now being {$orderStatus} .H.A.T.O.D. Tracking System
             ");
         return $message->send();
     }
@@ -70,9 +74,19 @@ class Order extends Model
 
     public function scopeSet($query, $orderStatus)
     {
-        return $query->update([
+        $columns = [
             'status' => $orderStatus,
-        ]);
+        ];
+
+        if ($orderStatus === 'received') {
+            $columns['datetime_received'] = now();
+        }
+
+        if ($orderStatus === 'delivered') {
+            $this->notifyCustomer('DELIVERED');
+        }
+
+        return $query->update($columns);
     }
 
 }

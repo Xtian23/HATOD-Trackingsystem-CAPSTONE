@@ -33,20 +33,20 @@
      <div class="form-row text-center  ">
       <form action="{{ url()->current() }}" method="GET">
 
-      
+
             <div class="form-group col-md-2">
                 <label ><b>Start Date</b></label>
-               
+
                 <input type="date" class="form-control start_date" name="start_date">
             </div>
- 
+
 
            <div class="form-group col-md-2">
                 <label for="exampleFormControlSelect2"><b>End Date</b></label>
- 
+
                 <input type="date" class="form-control end_date"  name="end_date">
            </div>
-       
+
            <div class="form-group col-md-3">
             <label for="exampleFormControlSelect2"><b>Customers</b></label>
             {!! Form::select('customer_id',  $customers->prepend('Select Customer Name', ''), null, ['class' => 'form-control select2']) !!}
@@ -61,7 +61,7 @@
              <button type="submit" class="btn btn-primary"><img src="/filter.png" width="20px"> Filter</button>
            </div>
 
-         </form>  
+         </form>
     </div>
   </div>
 </div>
@@ -79,7 +79,7 @@
       <th>Total Amount</th>
       <th class="text-center">
         <span></span>
-          Action  
+          Action
       </th>
 
 
@@ -131,7 +131,7 @@
                                       </div>
                                         <div class="">
                                         <b>Date/Time Delivered:</b>
-                               
+                                        {{ $row->datetime_received ? $row->datetime_received->format('M d, Y h:i a') : null }}
                                       </div>
                                        <div class="">
                                         <b>Delivered By:</b>
@@ -176,7 +176,7 @@
 
                                            <div class="text-right">
                                             <b>Total:</b>
-                                            {{ number_format($row->total, 2) }} 
+                                            {{ number_format($row->total, 2) }}
                                           </div>
                                     </div>
                                     <div class="modal-footer">
@@ -186,7 +186,7 @@
                                   </div>
                                 </div>
                               </div>
-        </td>   
+        </td>
       </tr>
     @endforeach
     <div class="hypebeast">

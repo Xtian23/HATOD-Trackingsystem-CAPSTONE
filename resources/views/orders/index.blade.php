@@ -77,10 +77,12 @@
         <td>{{ $row->status}}</td>
         <td class="text-center">{{ number_format($row->total, 2) }}</td>
           <td width="15%">
-              {!! Form::open(['url' => route('orders.destroy', $row->id), 'method' => 'DELETE', 'onclick' => "javascript:confirm('Are you sure?')" ]) !!}
-                <button type="submit" class="btn btn-sm btn-danger"><img src="/delete.png" height="16px">Delete</button>
+              {!! Form::open(['url' => route('orders.destroy', $row->id), 'method' => 'DELETE' ]) !!}
+
+                  <a href="{{ route('orders.edit', $row->id) }}" class="btn btn-primary btn-sm"><img src="/edit.png" height="15px"> Edit</a>
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Order?')"><img src="/delete.png" height="16px" >Delete</button>
               {!! Form::close() !!}
-                <a href="{{ route('orders.edit', $row->id) }}" class="btn btn-primary btn-sm"><img src="/edit.png" height="15px"> Edit</a>
+            
           </td>
       </tr>
     @endforeach

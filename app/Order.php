@@ -21,6 +21,7 @@ class Order extends Model
         'served_by',
         'delivered_by',
         'status',
+        'datetime_received',
     ];
 
     protected $dates = [

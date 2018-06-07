@@ -9,7 +9,9 @@ class DriverRouteController extends Controller
 {
     public function __invoke()
     {
-        $drivers = Personnel::driver()->get();
+        // $drivers = Personnel::driver()->get();
+         $drivers = Personnel::driver()->where('personneltype', '=', "delivery")->get();
+
 
         return view('driver-route', compact('drivers'));
     }

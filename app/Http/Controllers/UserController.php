@@ -80,6 +80,8 @@ class UserController extends Controller
              return redirect('/login')->with(Auth::logout());
           }else{
             return redirect('/clerklogin')->with(Auth::logout());
+            
+
           }
         
 

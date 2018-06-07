@@ -3,6 +3,7 @@
 <style>
   /* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
+
   #map {
     height: 100%;
   }
@@ -12,16 +13,25 @@
     margin: 0;
     padding: 0;
   }
+
+  .rowmain{
+    height: 81%;
+  }
+
+  }
+</style>
+
 </style>
 @endpush
 @section('contentz')
+<div class="rowmain ">
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-2 ml-5">
     <div class="card">
       <table class="table mb-0" id="driver-table">
         <thead>
           <tr>
-            <th>Driver</th>
+            <th>Delivery Personnel</th>
           </tr>
         </thead>
         <tbody>
@@ -105,3 +115,5 @@
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApzL1AXKwyfJT2tT5c5KkxFqnfv2txpQw&callback=initMap">
 </script>
 @endpush
+
+</div>
